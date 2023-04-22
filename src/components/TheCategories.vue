@@ -56,7 +56,7 @@ export default {
   computed: {
     classes() {
       return [
-        // this.isSidebarOpen ? 'xl:pl-64' : 'md:pl-24',
+        this.isSidebarOpen ? 'xl:pl-64' : 'md:pl-24',
         'pt-14',
 
         'w-full',
