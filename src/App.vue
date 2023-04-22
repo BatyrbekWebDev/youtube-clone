@@ -12,7 +12,7 @@
 
   <TheCategories :is-sidebar-open="sidebarState === 'normal'" />
 
-  <TheVideos :is-sidebar-open="sidebarState === 'normal'" />
+  <!-- <TheVideos :is-sidebar-open="sidebarState === 'normal'" /> -->
 </template>
 
 <script>
