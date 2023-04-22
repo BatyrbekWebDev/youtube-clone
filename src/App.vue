@@ -1,18 +1,18 @@
 <template>
   <TheHeader @toggle-sidebar="toggleSidebar" />
 
-  <TheSidebarSmall :is-open="sidebarState === 'compact'" />
+  <TheSidebarSmall :is-open="isCompactSidebarOpen" />
 
-  <TheSidebar :is-open="sidebarState === 'normal'" />
+  <TheSidebar :is-open="isSidebarOpen" />
 
   <TheSidebarMobile
     :is-open="isMobileSidebarOpen"
     @close="closeMobileSidebar"
   />
 
-  <TheCategories :is-sidebar-open="sidebarState === 'normal'" />
+  <TheCategories :is-sidebar-open="isSidebarOpen" />
 
-  <TheVideos :is-sidebar-open="sidebarState === 'normal'" />
+  <TheVideos :is-sidebar-open="isSidebarOpen" />
 </template>
 
 <script>
@@ -35,13 +35,39 @@ export default {
   data() {
     return {
       sidebarState: null,
+      isCompactSidebarOpen: false,
+      isSidebarOpen: false,
       isMobileSidebarOpen: false,
     };
   },
+  mounted() {
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+      this.sidebarState = 'compact';
+    }
+    if (window.innerWidth >= 1280) {
+      this.sidebarState = 'normal';
+    }
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+  },
   methods: {
+    onResize() {
+      if (window.innerWidth < 768) {
+        this.isCompactSidebarOpen = false;
+        this.isSidebarOpen = false;
+      } else if (window.innerWidth < 1280) {
+        this.isCompactSidebarOpen = true;
+        this.isSidebarOpen = false;
+      } else {
+        this.isCompactSidebarOpen = this.sidebarState === 'compact';
+        this.isSidebarOpen = this.sidebarState === 'normal';
+      }
+    },
     toggleSidebar() {
       if (window.innerWidth >= 1280) {
-        this.sidebarState = this.sidebarState === 'normal' ? 'compact' : 'normal';
+        this.sidebarState =
+          this.sidebarState === 'normal' ? 'compact' : 'normal';
+        this.onResize();
       } else {
         this.openMobileSidebar();
       }
@@ -52,14 +78,6 @@ export default {
     closeMobileSidebar() {
       this.isMobileSidebarOpen = false;
     },
-  },
-  mounted() {
-    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-      this.sidebarState = 'compact';
-    }
-    if (window.innerWidth >= 1280) {
-      this.sidebarState = 'normal';
-    }
   },
 };
 </script>
