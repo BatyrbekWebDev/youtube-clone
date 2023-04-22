@@ -1,9 +1,9 @@
 <template>
   <TheHeader @toggle-sidebar="toggleSidebar" />
 
-  <TheSidebarSmall :is-open="isCompactSidebarOpen" />
+  <TheSidebarCompact v-if="isCompactSidebarOpen" />
 
-  <TheSidebar :is-open="isSidebarOpen" />
+  <TheSidebar v-if="isSidebarOpen" />
 
   <TheSidebarMobile
     :is-open="isMobileSidebarOpen"
@@ -17,7 +17,7 @@
 
 <script>
 import TheHeader from './components/TheHeader.vue';
-import TheSidebarSmall from './components/TheSidebarSmall.vue';
+import TheSidebarCompact from './components/TheSidebarCompact.vue';
 import TheSidebar from './components/TheSidebar.vue';
 import TheSidebarMobile from './components/TheSidebarMobile.vue';
 import TheCategories from './components/TheCategories.vue';
@@ -26,7 +26,7 @@ import TheVideos from './components/TheVideos.vue';
 export default {
   components: {
     TheHeader,
-    TheSidebarSmall,
+    TheSidebarCompact,
     TheSidebar,
     TheSidebarMobile,
     TheCategories,
@@ -34,18 +34,18 @@ export default {
   },
   data() {
     return {
-      sidebarState: null,
+      isCompactSidebarActive: false,
       isCompactSidebarOpen: false,
-      isSidebarOpen: false,
       isMobileSidebarOpen: false,
+      isSidebarOpen: false,
     };
   },
   mounted() {
     if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-      this.sidebarState = 'compact';
+      this.isCompactSidebarActive = true;
     }
     if (window.innerWidth >= 1280) {
-      this.sidebarState = 'normal';
+      this.isCompactSidebarActive = false;
     }
     this.onResize();
     window.addEventListener('resize', this.onResize);
@@ -59,14 +59,13 @@ export default {
         this.isCompactSidebarOpen = true;
         this.isSidebarOpen = false;
       } else {
-        this.isCompactSidebarOpen = this.sidebarState === 'compact';
-        this.isSidebarOpen = this.sidebarState === 'normal';
+        this.isCompactSidebarOpen = this.isCompactSidebarActive;
+        this.isSidebarOpen = !this.isCompactSidebarActive;
       }
     },
     toggleSidebar() {
       if (window.innerWidth >= 1280) {
-        this.sidebarState =
-          this.sidebarState === 'normal' ? 'compact' : 'normal';
+        this.isCompactSidebarActive = !this.isCompactSidebarActive;
         this.onResize();
       } else {
         this.openMobileSidebar();
