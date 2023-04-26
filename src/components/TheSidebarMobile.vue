@@ -58,11 +58,6 @@ export default {
   watch: {
     isOpen() {
       this.$nextTick(() => this.isOpen && this.$refs.mobileSidebar.focus());
-      // this.$nextTick(() => {
-      //   if (this.isOpen) {
-      //     this.$refs.mobileSidebar.focus();
-      //   }
-      // });
     },
   },
 };
