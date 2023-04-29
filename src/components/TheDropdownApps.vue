@@ -1,8 +1,10 @@
 <template>
   <div class="relative">
-    <button @click="isOpen = !isOpen" class="relative p-2 focus:outline-none">
-      <BaseIcon name="viewGrid" class="w-5 h-5" />
-    </button>
+    <BaseToolTip text="YouTube apps">
+      <button @click="isOpen = !isOpen" class="relative p-2 focus:outline-none">
+        <BaseIcon name="viewGrid" class="w-5 h-5" />
+      </button>
+    </BaseToolTip>
     <transition
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transition opacity-0 scale-95"
@@ -42,11 +44,13 @@
 <script>
 import BaseIcon from './BaseIcon.vue';
 import DropdownAppsListItem from './DropdownAppsListItem.vue';
+import BaseToolTip from './BaseToolTip.vue';
 
 export default {
   components: {
     DropdownAppsListItem,
     BaseIcon,
+    BaseToolTip,
   },
   data() {
     return {
