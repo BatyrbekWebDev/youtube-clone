@@ -9,7 +9,7 @@
     :is-open="isMobileSidebarOpen"
     @close="closeMobileSidebar"
   />
-  <TheVideos :is-sidebar-open="isSidebarOpen" />
+  <TheVideos :is-sidebar-open="isSidebarOpen" /> 
 </template>
 
 <script>
