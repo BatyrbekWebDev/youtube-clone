@@ -28,6 +28,7 @@ export default {
   components: {
     DropdownSettingsListItem,
   },
+  emits: ['select-menu'],
   data() {
     return {
       listItems: [
