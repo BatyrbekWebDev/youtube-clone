@@ -21,7 +21,8 @@
         tabindex="-1"
         :class="dropdownClasses"
       >
-        <TheDropdownSettingsMain
+      <component :is="menu" @select-menu="showSelectedMenu"/>
+        <!-- <TheDropdownSettingsMain
           v-if="selectedMenu === 'main'"
           @select-menu="showSelectedMenu"
         />
@@ -40,7 +41,7 @@
         <TheDropdownSettingsRestrictedMode
           v-else-if="selectedMenu === 'restricted_mode'"
           @select-menu="showSelectedMenu"
-        />
+        /> -->
       </div>
     </transition>
   </div>
@@ -82,6 +83,18 @@ export default {
         'focus:outline-none',
       ],
     };
+  },
+  computed: {
+    menu() {
+      const menuComponentNames = {
+        main: 'TheDropdownSettingsMain',
+        appearance: 'TheDropdownSettingsAppearance',
+        language: 'TheDropdownSettingsLanguage',
+        location: 'TheDropdownSettingsLocation',
+        restricted_mode: 'TheDropdownSettingsRestrictedMode',
+      }
+      return menuComponentNames[this.selectedMenu]
+    }
   },
   watch: {
     isOpen() {

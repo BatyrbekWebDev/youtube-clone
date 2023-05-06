@@ -1,8 +1,13 @@
 <template>
   <section class="py-2 border-b">
     <ul>
-      <DropdownSettingsListItem v-for="listItem in listItems.slice(0, 8)" :key="listItem.label" :label="listItem.label"
-        :icon="listItem.icon" :with-sub-menu="listItem.withSubMenu" @click.stop="$emit('select-menu', listItem.id)" />
+      <DropdownSettingsListItem 
+        v-for="listItem in listItems.slice(0, 8)" 
+        :key="listItem.label" 
+        :label="listItem.label"
+        :icon="listItem.icon" :with-sub-menu="listItem.withSubMenu"
+        @click.stop="selectMenu(listItem)"
+      />
     </ul>
   </section>
   <section class="py-2">
@@ -11,7 +16,7 @@
         :label="listItems[8].label"
         :icon="listItems[8].icon"
         :with-sub-menu="listItems[8].withSubMenu"
-        @click.stop="$emit('select-menu', listItems[8].id)" />
+        @click.stop="$emit('select-menu', listItems[8])" />
     </ul>
   </section>
 </template>
@@ -84,5 +89,13 @@ export default {
       ],
     };
   },
+  methods: {
+    selectMenu(listItem) {
+      if(listItem.withSubMenu) {
+        this.$emit('select-menu', listItem.id)
+      }
+       
+    }
+  }
 };
 </script>
