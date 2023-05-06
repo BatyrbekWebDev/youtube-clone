@@ -7,7 +7,11 @@
   </section>
   <section class="py-2">
     <ul>
-      <DropdownSettingsListItem :label="listItems[8].label" :with-sub-menu="listItems[8].withSubMenu" />
+      <DropdownSettingsListItem 
+        :label="listItems[8].label"
+        :icon="listItems[8].icon"
+        :with-sub-menu="listItems[8].withSubMenu"
+        @click.stop="$emit('select-menu', listItems[8].id)" />
     </ul>
   </section>
 </template>
@@ -31,12 +35,10 @@ export default {
         },
         {
           id: 'language',
-
           label: 'English',
           icon: 'translate',
           withSubMenu: true,
         },
-
         {
           id: 'location',
           label: 'Spain',
