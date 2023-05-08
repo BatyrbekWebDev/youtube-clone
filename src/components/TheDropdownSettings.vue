@@ -21,27 +21,8 @@
         tabindex="-1"
         :class="dropdownClasses"
       >
-      <component :is="menu" @select-menu="showSelectedMenu"/>
-        <!-- <TheDropdownSettingsMain
-          v-if="selectedMenu === 'main'"
-          @select-menu="showSelectedMenu"
-        />
-        <TheDropdownSettingsAppearance
-          v-else-if="selectedMenu === 'appearance'"
-          @select-menu="showSelectedMenu"
-        />
-        <TheDropdownSettingsLanguage
-          v-else-if="selectedMenu === 'language'"
-          @select-menu="showSelectedMenu"
-        />
-        <TheDropdownSettingsLocation
-          v-else-if="selectedMenu === 'location'"
-          @select-menu="showSelectedMenu"
-        />
-        <TheDropdownSettingsRestrictedMode
-          v-else-if="selectedMenu === 'restricted_mode'"
-          @select-menu="showSelectedMenu"
-        /> -->
+      <component :is="menu" @select-menu="showSelectedMenu" :selected-options="selectedOptions"/>
+
       </div>
     </transition>
   </div>
@@ -70,6 +51,12 @@ export default {
     return {
       isOpen: false,
       selectedMenu: 'main',
+      selectedOptions: {
+        themeId: 0,
+        languageId: 0,
+        locationId: 0,
+        restrictedMode: false,
+      },
       dropdownClasses: [
         'z-10',
         'absolute',

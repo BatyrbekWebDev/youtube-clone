@@ -6,7 +6,7 @@
     </div>
     <ul>
       <DropdownSettingsListItem v-for="(themeName, themeId) in themes" :key="themeId" :label="themeName"
-        :active="themeId === selectedThemeId" @click="selectedThemeId = themeId" />
+        :active="themeId === selectedOptions.themeId" @click="selectedThemeId = themeId" />
     </ul>
   </section>
 </template>
@@ -20,10 +20,10 @@ export default {
     DropdownSettingsListItem,
     DropdownSettingsHeader
   },
+  props: ['selected-options'],
   emits: ['select-menu',],
   data() {
     return {
-      selectedThemeId: 0,
       themes: ['Use device theme', 'Dark theme', 'Light theme'],
     };
   },
