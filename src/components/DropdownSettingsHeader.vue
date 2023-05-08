@@ -8,12 +8,15 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
+import BaseIcon from './BaseIcon.vue'
+
 export default {
   components: {
     BaseIcon
   },
+
   props: ['title'],
+
   emits: ['back']
 }
 </script>

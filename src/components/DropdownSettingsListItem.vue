@@ -6,7 +6,9 @@
         :name="iconName"
         class="w-5 h-5 mr-3 text-gray-400"
       />
-      <span :class="['truncate', 'flex-1', { 'ml-8': icon &&  !isIconShown }]">{{ label }}</span>
+      <span :class="['truncate', 'flex-1', { 'ml-8': icon && !isIconShown }]">
+        {{ label }}
+      </span>
       <BaseIcon
         v-if="withSubMenu"
         name="chevronRight"
@@ -17,28 +19,31 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
+import BaseIcon from './BaseIcon.vue'
 
 export default {
   components: {
-    BaseIcon,
+    BaseIcon
   },
+
   props: {
     active: Boolean,
     label: String,
     withSubMenu: Boolean,
     icon: {
       type: String,
-      default: 'check',
-    },
+      default: 'check'
+    }
   },
+
   computed: {
-    isIconShown() {
-      return this.active || (this.icon != 'check' && this.icon != null);
+    isIconShown () {
+      return this.active || (this.icon !== 'check' && this.icon !== null)
     },
-    iconName() {
-      return this.active ? 'check' : this.icon;
-    },
-  },
-};
+
+    iconName () {
+      return this.active ? 'check' : this.icon
+    }
+  }
+}
 </script>
