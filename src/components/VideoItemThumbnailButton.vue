@@ -8,23 +8,26 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
+import BaseIcon from './BaseIcon.vue'
 
 export default {
   components: {
-    BaseIcon,
+    BaseIcon
   },
-  data() {
-    return {
-      isBadgeShown: false,
-    };
-  },
+
   props: {
     icon: String,
-    label: String,
+    label: String
   },
+
+  data () {
+    return {
+      isBadgeShown: false
+    }
+  },
+
   computed: {
-    classes() {
+    classes () {
       return [
         'opacity-0',
         'group-hover:opacity-100',
@@ -35,10 +38,11 @@ export default {
         'text-white',
         'm-1',
         'p-1',
-        this.isBadgeShown ? 'rounded-r-sm' : 'rounded-sm',
-      ];
+        this.isBadgeShown ? 'rounded-r-sm' : 'rounded-sm'
+      ]
     },
-    badgeClasses() {
+
+    badgeClasses () {
       return [
         'absolute',
         'transition-width',
@@ -53,14 +57,15 @@ export default {
         'delay-100',
         'font-semibold',
         'rounded-l-sm',
-        this.isBadgeShown ? 'w-28' : 'w-0',
-      ];
-    },
+        this.isBadgeShown ? 'w-28' : 'w-0'
+      ]
+    }
   },
+
   methods: {
-    toggleBadge() {
-      this.isBadgeShown = !this.isBadgeShown;
-    },
-  },
-};
+    toggleBadge () {
+      this.isBadgeShown = !this.isBadgeShown
+    }
+  }
+}
 </script>

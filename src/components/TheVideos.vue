@@ -9,24 +9,26 @@
 </template>
 
 <script>
-import VideoItem from './VideoItem.vue';
+import VideoItem from './VideoItem.vue'
 
 export default {
   components: {
-    VideoItem,
+    VideoItem
   },
+
   props: {
-    isSidebarOpen: Boolean,
+    isSidebarOpen: Boolean
   },
+
   computed: {
-    classes() {
+    classes () {
       return [
         this.isSidebarOpen ? 'xl:ml-64' : 'md:ml-24',
         'pt-32',
         'px-5',
-        'pb-5',
-      ];
-    },
-  },
-};
+        'pb-5'
+      ]
+    }
+  }
+}
 </script>

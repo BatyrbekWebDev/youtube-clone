@@ -6,7 +6,7 @@
       <SidebarNavItem label="Subscriptions" icon="collection" />
     </ul>
   </SidebarSection>
-  <SidebarSection class="py-2 border-b">
+  <SidebarSection>
     <ul>
       <SidebarNavItem label="Library" icon="duplicate" />
       <SidebarNavItem label="History" icon="clock" />
@@ -32,10 +32,9 @@
       <SidebarNavItem label="360&deg; Video" icon="eye" />
     </ul>
   </SidebarSection>
-
   <SidebarSection>
     <ul>
-      <SidebarNavItem label="Browse channels" icon="plusCircle" />
+      <SidebarNavItem label="Browse Channels" icon="plusCircle" />
     </ul>
   </SidebarSection>
   <SidebarSection>
@@ -45,34 +44,33 @@
       <SidebarNavItem label="Live" icon="statusOnline" />
     </ul>
   </SidebarSection>
-
   <SidebarSection>
     <ul>
       <SidebarNavItem label="Settings" icon="cog" />
-      <SidebarNavItem label="Report History" icon="flag" />
+      <SidebarNavItem label="Report history" icon="flag" />
       <SidebarNavItem label="Help" icon="questionMarkCircle" />
-      <SidebarNavItem label="Send Feedback" icon="annotation" />
+      <SidebarNavItem label="Send feedback" icon="annotation" />
     </ul>
   </SidebarSection>
-
   <SidebarSection class="px-6 py-4 text-xs font-semibold space-y-4">
     <TheFooter />
   </SidebarSection>
 </template>
 
-<script lang="ts">
-import SidebarSection from './SidebarSection.vue';
-import SidebarSectionHeading from './SidebarSectionHeading.vue';
-import SidebarNavItem from './SidebarNavItem.vue';
-import ButtonLogin from './ButtonLogin.vue';
-import TheFooter from './TheFooter.vue';
+<script>
+import SidebarSection from './SidebarSection.vue'
+import SidebarSectionHeading from './SidebarSectionHeading.vue'
+import SidebarNavItem from './SidebarNavItem.vue'
+import ButtonLogin from './ButtonLogin.vue'
+import TheFooter from './TheFooter.vue'
+
 export default {
   components: {
     SidebarSection,
     SidebarSectionHeading,
     SidebarNavItem,
     ButtonLogin,
-    TheFooter,
-  },
-};
+    TheFooter
+  }
+}
 </script>

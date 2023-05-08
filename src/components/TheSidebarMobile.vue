@@ -9,7 +9,6 @@
   >
     <TheSidebarMobileOverlay @click="$emit('close')" v-show="isOpen" />
   </transition>
-
   <transition
     enter-active-class="transition ease-in-out duration-200 transform"
     enter-from-class="-translate-x-full"
@@ -23,7 +22,7 @@
       ref="mobileSidebar"
       @keydown.esc="$emit('close')"
       tabindex="-1"
-      class="h-screen w-64 max-h-screen overflow-auto bg-white fixed z-40 outline:none"
+      class="w-64 max-h-screen overflow-auto bg-white fixed z-40 outline-none"
     >
       <section class="flex items-center p-4 border-b sticky top-0 bg-white">
         <button @click="$emit('close')" class="ml-2 mr-6 focus:outline-none">
@@ -37,28 +36,31 @@
 </template>
 
 <script>
-import SidebarContent from './SidebarContent.vue';
-import LogoMain from './LogoMain.vue';
-import BaseIcon from './BaseIcon.vue';
-import TheSidebarMobileOverlay from './TheSidebarMobileOverlay.vue';
+import BaseIcon from './BaseIcon.vue'
+import SidebarContent from './SidebarContent.vue'
+import LogoMain from './LogoMain.vue'
+import TheSidebarMobileOverlay from './TheSidebarMobileOverlay.vue'
 
 export default {
   components: {
+    BaseIcon,
     SidebarContent,
     LogoMain,
-    BaseIcon,
-    TheSidebarMobileOverlay,
+    TheSidebarMobileOverlay
   },
+
   props: {
-    isOpen: Boolean,
+    isOpen: Boolean
   },
+
   emits: {
-    close: null,
+    close: null
   },
+
   watch: {
-    isOpen() {
-      this.$nextTick(() => this.isOpen && this.$refs.mobileSidebar.focus());
-    },
-  },
-};
+    isOpen () {
+      this.$nextTick(() => this.isOpen && this.$refs.mobileSidebar.focus())
+    }
+  }
+}
 </script>

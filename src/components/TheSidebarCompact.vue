@@ -15,44 +15,47 @@
 </template>
 
 <script>
-import SidebarCompactNavItem from './SidebarCompactNavItem.vue';
+import SidebarCompactNavItem from './SidebarCompactNavItem.vue'
+
 export default {
   components: {
-    SidebarCompactNavItem,
+    SidebarCompactNavItem
   },
-  data() {
+
+  data () {
     return {
       navItems: [
         {
           label: 'Home',
           icon: 'home',
-          isActive: true,
+          isActive: true
         },
         {
           label: 'Trending',
           icon: 'fire',
-          isActive: false,
+          isActive: false
         },
         {
           label: 'Subscriptions',
           icon: 'collection',
-          isActive: false,
+          isActive: false
         },
         {
           label: 'Library',
           icon: 'duplicate',
-          isActive: false,
+          isActive: false
         },
         {
           label: 'History',
           icon: 'clock',
-          isActive: false,
-        },
-      ],
-    };
+          isActive: false
+        }
+      ]
+    }
   },
+
   computed: {
-    classes() {
+    classes () {
       return [
         'min-h-screen',
         'overflow-auto',
@@ -60,10 +63,9 @@ export default {
         'top-0',
         'pt-14',
         'bg-white',
-        'z-20',
-      ];
-    },
-  },
-};
+        'z-20'
+      ]
+    }
+  }
+}
 </script>
-,
