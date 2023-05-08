@@ -1,9 +1,9 @@
 <template>
   <section class="py-2 border-b">
     <ul>
-      <DropdownSettingsListItem 
-        v-for="listItem in listItems.slice(0, 8)" 
-        :key="listItem.label" 
+      <DropdownSettingsListItem
+        v-for="listItem in listItems.slice(0, 8)"
+        :key="listItem.label"
         :label="listItem.label"
         :icon="listItem.icon"
         :with-sub-menu="listItem.withSubMenu"
@@ -13,11 +13,12 @@
   </section>
   <section class="py-2">
     <ul>
-      <DropdownSettingsListItem 
+      <DropdownSettingsListItem
         :label="listItems[8].label"
         :icon="listItems[8].icon"
         :with-sub-menu="listItems[8].withSubMenu"
-        @click.stop="selectMenu(listItems[8])" />
+        @click.stop="selectMenu(listItems[8])"
+      />
     </ul>
   </section>
 </template>
@@ -36,19 +37,19 @@ export default {
       listItems: [
         {
           id: 'appearance',
-          label: 'Appearance: Light',
+          label: 'Appearance: ' + this.selectedOptions.theme.text,
           icon: 'sun',
           withSubMenu: true,
         },
         {
           id: 'language',
-          label: 'English',
+          label: 'Language:  ' + this.selectedOptions.language.text,
           icon: 'translate',
           withSubMenu: true,
         },
         {
           id: 'location',
-          label: 'Spain',
+          label: 'Location: ' + this.selectedOptions.location.text,
           icon: 'globeAlt',
           withSubMenu: true,
         },
@@ -84,7 +85,7 @@ export default {
         },
         {
           id: 'restricted_mode',
-          label: 'Restricted Mode: Off',
+          label: 'Restricted Mode: ' + this.selectedOptions.restrictedMode.text,
           icon: null,
           withSubMenu: true,
         },
@@ -93,11 +94,10 @@ export default {
   },
   methods: {
     selectMenu(listItem) {
-      if(listItem.withSubMenu) {
-        this.$emit('select-menu', listItem.id)
+      if (listItem.withSubMenu) {
+        this.$emit('select-menu', listItem.id);
       }
-       
-    }
-  }
+    },
+  },
 };
 </script>

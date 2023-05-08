@@ -21,11 +21,11 @@
         tabindex="-1"
         :class="dropdownClasses"
       >
-      <component
-        :is="menu"
-        @select-menu="showSelectedMenu"
-        @select-option="selectOption"
-        :selected-options="selectedOptions"
+        <component
+          :is="menu"
+          @select-menu="showSelectedMenu"
+          @select-option="selectOption"
+          :selected-options="selectedOptions"
         />
       </div>
     </transition>
@@ -38,8 +38,8 @@ import BaseToolTip from './BaseToolTip.vue';
 import TheDropdownSettingsMain from './TheDropdownSettingsMain.vue';
 import TheDropdownSettingsAppearance from './TheDropdownSettingsAppearance.vue';
 import TheDropdownSettingsLanguage from './TheDropdownSettingsLanguage.vue';
-import TheDropdownSettingsLocation from './TheDropdownSettingsLocation.vue'
-import TheDropdownSettingsRestrictedMode from './TheDropdownSettingsRestrictedMode.vue'
+import TheDropdownSettingsLocation from './TheDropdownSettingsLocation.vue';
+import TheDropdownSettingsRestrictedMode from './TheDropdownSettingsRestrictedMode.vue';
 
 export default {
   components: {
@@ -49,17 +49,29 @@ export default {
     TheDropdownSettingsAppearance,
     TheDropdownSettingsLanguage,
     TheDropdownSettingsLocation,
-    TheDropdownSettingsRestrictedMode
+    TheDropdownSettingsRestrictedMode,
   },
   data() {
     return {
       isOpen: false,
       selectedMenu: 'main',
       selectedOptions: {
-        themeId: 0,
-        languageId: 0,
-        locationId: 0,
-        restrictedMode: false
+        theme: {
+          id: 0,
+          text: 'Device theme',
+        },
+        language: {
+          id: 0,
+          text: 'English',
+        },
+        location: {
+          id: 0,
+          text: 'United States'
+        },
+        restrictedMode: {
+          enabled: false,
+          text: 'Off'
+        },
       },
       dropdownClasses: [
         'z-10',
@@ -83,9 +95,9 @@ export default {
         language: 'TheDropdownSettingsLanguage',
         location: 'TheDropdownSettingsLocation',
         restricted_mode: 'TheDropdownSettingsRestrictedMode',
-      }
-      return menuComponentNames[this.selectedMenu]
-    }
+      };
+      return menuComponentNames[this.selectedMenu];
+    },
   },
   watch: {
     isOpen() {
@@ -105,7 +117,7 @@ export default {
       this.$refs.dropdown.focus();
     },
     selectOption(option) {
-      this.selectedOptions[option.name] = option.value
+      this.selectedOptions[option.name] = option.value;
     },
     toggle() {
       this.isOpen ? this.close() : this.open();
