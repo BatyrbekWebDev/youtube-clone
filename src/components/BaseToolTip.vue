@@ -9,10 +9,10 @@
       <slot />
     </div>
     <transition
-      enter-active-class="duration-200"
+      enter-active-class=" duration-200 "
       enter-from-class="opacity-0"
       enter-to-class="opacity-100"
-      leave-active-class="duration-75"
+      leave-active-class=" duration-75 "
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
@@ -27,10 +27,9 @@ export default {
     text: String,
     top: Boolean,
     right: Boolean,
-    left: Boolean
+    left: Boolean,
   },
-
-  data () {
+  data() {
     return {
       isShown: false,
       classes: [
@@ -43,25 +42,22 @@ export default {
         'p-2',
         'transform',
         'absolute',
-        ...this.getPositionClasses()
-      ]
-    }
+        ...this.getPositionClasses(),
+      ],
+    };
   },
-
   methods: {
-    getPositionClasses () {
-      const topClass = this.top ? 'bottom-12' : 'top-14'
+    getPositionClasses() {
+      const topClass = this.top ? 'bottom-12' : 'top-14';
 
       if (this.right) {
-        return [topClass, 'left-0']
+        return [topClass, 'left-0'];
       }
-
       if (this.left) {
-        return [topClass, 'right-0']
+        return [topClass, 'right-0'];
       }
-
-      return [topClass, 'left-1/2', '-translate-x-1/2']
-    }
-  }
-}
+      return [topClass, '-translate-x-1/2', 'left-1/2'];
+    },
+  },
+};
 </script>

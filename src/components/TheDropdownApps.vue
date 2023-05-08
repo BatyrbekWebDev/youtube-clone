@@ -1,15 +1,15 @@
 <template>
   <div class="relative">
-    <BaseTooltip text="YouTube apps">
+    <BaseToolTip text="YouTube apps">
       <button @click="isOpen = !isOpen" class="relative p-2 focus:outline-none">
         <BaseIcon name="viewGrid" class="w-5 h-5" />
       </button>
-    </BaseTooltip>
+    </BaseToolTip>
     <transition
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transition opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-75"
+      leave-active-class="transition ease-out duration-75"
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
     >
@@ -41,20 +41,18 @@
     </transition>
   </div>
 </template>
-
 <script>
-import BaseIcon from './BaseIcon.vue'
-import BaseTooltip from './BaseTooltip.vue'
-import DropdownAppsListItem from './DropdownAppsListItem.vue'
+import BaseIcon from './BaseIcon.vue';
+import DropdownAppsListItem from './DropdownAppsListItem.vue';
+import BaseToolTip from './BaseToolTip.vue';
 
 export default {
   components: {
+    DropdownAppsListItem,
     BaseIcon,
-    BaseTooltip,
-    DropdownAppsListItem
+    BaseToolTip,
   },
-
-  data () {
+  data() {
     return {
       isOpen: false,
       dropdownClasses: [
@@ -67,23 +65,21 @@ export default {
         'w-60',
         'border',
         'border-t-0',
-        'focus:outline-none'
-      ]
-    }
+        'focus:outline-none',
+      ],
+    };
   },
-
   watch: {
-    isOpen () {
-      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus())
-    }
+    isOpen() {
+      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus());
+    },
   },
-
-  mounted () {
-    window.addEventListener('click', event => {
+  mounted() {
+    window.addEventListener('click', (event) => {
       if (!this.$el.contains(event.target)) {
-        this.isOpen = false
+        this.isOpen = false;
       }
-    })
-  }
-}
+    });
+  },
+};
 </script>

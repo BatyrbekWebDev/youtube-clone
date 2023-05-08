@@ -1,45 +1,32 @@
 <template>
-  <DropdownSettingsHeader
-    title="Choose your language"
-    @back="$emit('select-menu', 'main')"
-  />
+  <DropdownSettingsHeader title="Choose your language" @back="$emit('select-menu', 'main')" />
   <section class="py-2">
     <ul class="max-h-96 overflow-auto">
-      <DropdownSettingsListItem
-        v-for="(languageName, languageId) in languages"
-        :key="languageId"
+      <DropdownSettingsListItem 
+        v-for="(languageName, languageId) in languages" 
+        :key="languageId" 
         :label="languageName"
-        :active="languageId === selectedOptions.language.id"
-        @click="selectOption({ id: languageId, text: languageName })"
-      />
+        :active="languageId === selectedLanguageId" 
+        @click="selectedLanguageId = languageId" />
     </ul>
   </section>
 </template>
 
 <script>
+import DropdownSettingsListItem from './DropdownSettingsListItem.vue';
 import DropdownSettingsHeader from './DropdownSettingsHeader.vue'
-import DropdownSettingsListItem from './DropdownSettingsListItem.vue'
 
 export default {
   components: {
-    DropdownSettingsHeader,
-    DropdownSettingsListItem
+    DropdownSettingsListItem,
+    DropdownSettingsHeader
   },
-
-  props: ['selectedOptions'],
-
-  emits: ['select-menu', 'select-option'],
-
-  data () {
+  emits: ['select-menu',],
+  data() {
     return {
-      languages: ['English', 'Russian']
-    }
+      selectedLanguageId: 0,
+      languages: ['English', 'Russia',],
+    };
   },
-
-  methods: {
-    selectOption (language) {
-      this.$emit('select-option', { name: 'language', value: language })
-    }
-  }
-}
+};
 </script>

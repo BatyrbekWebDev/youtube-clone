@@ -6,15 +6,14 @@
 </template>
 
 <script>
-import VideoItemThumbnail from './VideoItemThumbnail.vue'
-import VideoItemInfo from './VideoItemInfo.vue'
+import VideoItemThumbnail from './VideoItemThumbnail.vue';
+import VideoItemInfo from './VideoItemInfo.vue';
 
 export default {
   components: {
     VideoItemThumbnail,
-    VideoItemInfo
+    VideoItemInfo,
   },
-
-  props: ['index']
-}
+  props: ['index'],
+};
 </script>

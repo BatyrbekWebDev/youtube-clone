@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       classes: [
         'w-full',
@@ -15,15 +15,14 @@ export default {
         'border',
         'border-gray-300',
         'focus:border-blue-700',
-        'focus:outline-none'
-      ]
+        'focus:outline-none',
+      ],
+    };
+  },
+  mounted() {
+    if (window.innerWidth < 640) {
+      this.$el.focus();
     }
   },
-
-  mounted () {
-    if (window.innerWidth < 640) {
-      this.$el.focus()
-    }
-  }
-}
+};
 </script>

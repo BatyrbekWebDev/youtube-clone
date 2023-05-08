@@ -1,15 +1,16 @@
 <template>
   <div class="relative">
-    <BaseTooltip text="Settings">
+    <BaseToolTip text="Settings">
       <button @click="toggle" class="relative p-2 focus:outline-none">
         <BaseIcon name="dotsVertical" class="w-5 h-5" />
       </button>
-    </BaseTooltip>
+    </BaseToolTip>
+
     <transition
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transition opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-75"
+      leave-active-class="transition ease-out duration-75"
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
     >
@@ -20,59 +21,35 @@
         tabindex="-1"
         :class="dropdownClasses"
       >
-        <component
-          :is="menu"
-          @select-menu="showSelectedMenu"
-          @select-option="selectOption"
-          :selected-options="selectedOptions"
-        />
+      <component :is="menu" @select-menu="showSelectedMenu"/>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue'
-import BaseTooltip from './BaseToolTip.vue'
-import TheDropdownSettingsMain from './TheDropdownSettingsMain.vue'
-import TheDropdownSettingsAppearance from './TheDropdownSettingsAppearance.vue'
-import TheDropdownSettingsLanguage from './TheDropdownSettingsLanguage.vue'
+import BaseIcon from './BaseIcon.vue';
+import BaseToolTip from './BaseToolTip.vue';
+import TheDropdownSettingsMain from './TheDropdownSettingsMain.vue';
+import TheDropdownSettingsAppearance from './TheDropdownSettingsAppearance.vue';
+import TheDropdownSettingsLanguage from './TheDropdownSettingsLanguage.vue';
 import TheDropdownSettingsLocation from './TheDropdownSettingsLocation.vue'
 import TheDropdownSettingsRestrictedMode from './TheDropdownSettingsRestrictedMode.vue'
 
 export default {
   components: {
     BaseIcon,
-    BaseTooltip,
+    BaseToolTip,
     TheDropdownSettingsMain,
     TheDropdownSettingsAppearance,
     TheDropdownSettingsLanguage,
     TheDropdownSettingsLocation,
     TheDropdownSettingsRestrictedMode
   },
-
-  data () {
+  data() {
     return {
       isOpen: false,
       selectedMenu: 'main',
-      selectedOptions: {
-        theme: {
-          id: 0,
-          text: 'Device theme'
-        },
-        language: {
-          id: 0,
-          text: 'English'
-        },
-        location: {
-          id: 0,
-          text: 'United States'
-        },
-        restrictedMode: {
-          enabled: false,
-          text: 'Off'
-        }
-      },
       dropdownClasses: [
         'z-10',
         'absolute',
@@ -83,63 +60,49 @@ export default {
         'w-72',
         'border',
         'border-t-0',
-        'focus:outline-none'
-      ]
-    }
+        'focus:outline-none',
+      ],
+    };
   },
-
   computed: {
-    menu () {
+    menu() {
       const menuComponentNames = {
         main: 'TheDropdownSettingsMain',
         appearance: 'TheDropdownSettingsAppearance',
         language: 'TheDropdownSettingsLanguage',
         location: 'TheDropdownSettingsLocation',
-        restricted_mode: 'TheDropdownSettingsRestrictedMode'
+        restricted_mode: 'TheDropdownSettingsRestrictedMode',
       }
-
       return menuComponentNames[this.selectedMenu]
     }
   },
-
   watch: {
-    isOpen () {
-      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus())
-    }
+    isOpen() {
+      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus());
+    },
   },
-
-  mounted () {
-    window.addEventListener('click', event => {
+  mounted() {
+    window.addEventListener('click', (event) => {
       if (!this.$el.contains(event.target)) {
-        this.close()
+        this.close();
       }
-    })
+    });
   },
-
   methods: {
-    showSelectedMenu (selectedMenu) {
-      this.selectedMenu = selectedMenu
-
-      this.$refs.dropdown.focus()
+    showSelectedMenu(selectedMenu) {
+      this.selectedMenu = selectedMenu;
+      this.$refs.dropdown.focus();
     },
-
-    selectOption(option) {
-      this.selectedOptions[option.name] = option.value
+    toggle() {
+      this.isOpen ? this.close() : this.open();
     },
-
-    toggle () {
-      this.isOpen ? this.close() : this.open()
+    open() {
+      this.isOpen = true;
     },
-
-    open () {
-      this.isOpen = true
+    close() {
+      this.isOpen = false;
+      setTimeout(() => (this.selectedMenu = 'main'), 100);
     },
-
-    close () {
-      this.isOpen = false
-
-      setTimeout(() => (this.selectedMenu = 'main'), 100)
-    }
-  }
-}
+  },
+};
 </script>

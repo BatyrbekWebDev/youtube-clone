@@ -16,18 +16,18 @@
 </template>
 
 <script>
-import CategoryItem from './CategoryItem.vue'
+import CategoryItem from './CategoryItem.vue';
 
 export default {
   components: {
-    CategoryItem
+    CategoryItem,
   },
 
   props: {
-    isSidebarOpen: Boolean
+    isSidebarOpen: Boolean,
   },
 
-  data () {
+  data() {
     return {
       categories: [
         'All',
@@ -44,21 +44,21 @@ export default {
         'Woodworking',
         'Tractors',
         'Songs',
-        'Shows',
+        'TV Shows',
         'Football',
         'Planes',
         'Live',
         'Streets',
         'Math',
-        'Programming'
-      ]
-    }
+        'Programming',
+      ],
+    };
   },
 
   computed: {
-    classes () {
-      return this.isSidebarOpen ? 'xl:pl-64' : 'md:pl-24'
-    }
-  }
-}
+    classes() {
+      return this.isSidebarOpen ? 'xl:pl-64' : 'md:pl-24';
+    },
+  },
+};
 </script>

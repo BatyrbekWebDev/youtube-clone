@@ -5,26 +5,24 @@
 </template>
 
 <script>
-import SidebarContent from './SidebarContent.vue'
-
+import SidebarContent from './SidebarContent.vue';
 export default {
   components: {
-    SidebarContent
+    SidebarContent,
   },
-
   computed: {
-    classes () {
+    classes() {
       return [
         'w-64',
-        'max-h-screen',
+        'h-screen',
         'overflow-auto',
         'fixed',
         'top-0',
         'pt-12',
         'bg-white',
-        'z-20'
-      ]
-    }
-  }
-}
+        'z-20',
+      ];
+    },
+  },
+};
 </script>

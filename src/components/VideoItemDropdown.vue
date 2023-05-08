@@ -7,11 +7,10 @@
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transition opacity-0 scale-95"
       enter-to-class="transform opacity-100 scale-100"
-      leave-active-class="transition ease-in duration-75"
+      leave-active-class="transition ease-out duration-75"
       leave-from-class="transform opacity-100 scale-100"
       leave-to-class="transform opacity-0 scale-95"
-    >
-      <div
+      ><div
         v-show="isOpen"
         ref="dropdown"
         @keydown.esc="isOpen = false"
@@ -29,35 +28,31 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue'
-import VideoItemDropdownListItem from './VideoItemDropdownListItem.vue'
-
+import VideoItemDropdownListItem from './VideoItemDropdownListItem.vue';
+import BaseIcon from './BaseIcon.vue';
 export default {
   components: {
     BaseIcon,
-    VideoItemDropdownListItem
+    VideoItemDropdownListItem,
   },
-
-  data () {
+  data() {
     return {
       isOpen: false,
-      positionClasses: []
-    }
+      positionClasses: [],
+    };
   },
-
   computed: {
-    buttonClasses () {
+    buttonClasses() {
       return [
         'p-1',
         'text-gray-500',
         'hover:text-gray-700',
         'focus:outline-none',
         'group-hover:opacity-100',
-        this.isOpen ? 'opacity-100' : 'opacity-0'
-      ]
+        this.isOpen ? 'opacity-100' : 'opacity-0',
+      ];
     },
-
-    dropdownClasses () {
+    dropdownClasses() {
       return [
         'z-30',
         'absolute',
@@ -69,119 +64,99 @@ export default {
         'rounded',
         'shadow',
         'focus:outline-none',
-        ...this.positionClasses
-      ]
-    }
+        ...this.positionClasses,
+      ];
+    },
   },
-
   watch: {
-    isOpen () {
+    isOpen() {
       // document.body.classList.toggle('overflow-hidden')
-
-      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus())
-    }
+      this.$nextTick(() => this.isOpen && this.$refs.dropdown.focus());
+    },
   },
-
-  mounted () {
-    window.addEventListener('click', event => {
+  mounted() {
+    window.addEventListener('click', (event) => {
       if (!this.$el.contains(event.target)) {
-        this.isOpen = false
+        this.isOpen = false;
       }
-    })
-
-    // window.addEventListener('scroll', () => (this.isOpen = false))
+    });
+    // window.addEventListener('scroll', () => (this.isOpen = false));
   },
-
   methods: {
-    toggle (event) {
-      this.isOpen = !this.isOpen
-
+    toggle(event) {
+      this.isOpen = !this.isOpen;
       if (this.isOpen) {
         this.$nextTick(() => {
-          this.positionClasses = this.getPositionClasses(event)
-        })
+          this.positionClasses = this.getPositionClasses(event);
+        });
       }
     },
-
-    getPositionClasses (event) {
+    getPositionClasses(event) {
       return [
         this.getTopClass(event),
         this.getRightClass(event),
         this.getBottomClass(event),
-        this.getLeftClass(event)
-      ]
+        this.getLeftClass(event),
+      ];
     },
-
-    getTopClass (event) {
-      const clickCoordY = event.clientY
-      const buttonHeight = event.currentTarget.offsetHeight
-      const dropdownHeight = this.$refs.dropdown.offsetHeight
+    getTopClass(event) {
+      const clickCoordY = event.clientY;
+      const buttonHeight = event.currentTarget.offsetHeight;
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
 
       if (window.innerHeight - clickCoordY < dropdownHeight) {
-        return 'top-auto'
+        return 'top-auto';
       }
-
       if (window.innerHeight - clickCoordY < dropdownHeight + buttonHeight) {
-        return 'top-0'
+        return 'top-0';
       }
-
-      return 'top-8'
+      return 'top-8';
     },
-
-    getRightClass (event) {
-      const clickCoordX = event.clientX
-      const clickCoordY = event.clientY
-      const buttonHeight = event.currentTarget.offsetHeight
-      const dropdownWidth = this.$refs.dropdown.offsetWidth
-      const dropdownHeight = this.$refs.dropdown.offsetHeight
+    getRightClass(event) {
+      const clickCoordX = event.clientX;
+      const clickCoordY = event.clientY;
+      const buttonHeight = event.currentTarget.offsetHeight;
+      const dropdownWidth = this.$refs.dropdown.offsetWidth;
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
 
       if (window.innerWidth - clickCoordX > dropdownWidth) {
-        return 'right-auto'
+        return 'right-auto';
       }
-
       if (window.innerHeight - clickCoordY > dropdownHeight + buttonHeight) {
-        return 'right-0'
+        return 'right-0';
       }
-
       if (window.innerHeight - clickCoordY > dropdownHeight) {
-        return 'right-8'
+        return 'right-8';
       }
-
-      return 'right-0'
+      return 'right-0';
     },
-
-    getBottomClass (event) {
-      const clickCoordY = event.clientY
-      const dropdownHeight = this.$refs.dropdown.offsetHeight
+    getBottomClass(event) {
+      const clickCoordY = event.clientY;
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
 
       if (window.innerHeight - clickCoordY < dropdownHeight) {
-        return 'bottom-9'
+        return 'bottom-8';
       }
-
-      return 'bottom-auto'
+      return 'bottom-auto';
     },
-
-    getLeftClass (event) {
-      const clickCoordX = event.clientX
-      const clickCoordY = event.clientY
-      const buttonHeight = event.currentTarget.offsetHeight
-      const dropdownWidth = this.$refs.dropdown.offsetWidth
-      const dropdownHeight = this.$refs.dropdown.offsetHeight
+    getLeftClass(event) {
+      const clickCoordX = event.clientX;
+      const clickCoordY = event.clientY;
+      const buttonHeight = event.currentTarget.offsetHeight;
+      const dropdownHeight = this.$refs.dropdown.offsetHeight;
+      const dropdownWidth = this.$refs.dropdown.offsetWidth;
 
       if (window.innerWidth - clickCoordX < dropdownWidth) {
-        return 'left-auto'
+        return 'left-auto';
       }
-
-      if (window.innerHeight - clickCoordY < dropdownHeight) {
-        return 'left-auto'
+      if (window.innerHeight - clickCoordX < dropdownHeight) {
+        return 'left-auto';
       }
-
       if (window.innerHeight - clickCoordY > dropdownHeight + buttonHeight) {
-        return 'left-auto'
+        return 'left-auto';
       }
-
-      return 'left-8'
-    }
-  }
-}
+      return 'left-8';
+    },
+  },
+};
 </script>

@@ -1,45 +1,40 @@
 <template>
   <div class="absolute w-full p-2 z-10 flex">
-    <BaseTooltip text="Back" right>
+    <BaseToolTip text="Back" right>
       <button @click="$emit('close')" class="mr-2 p-2 focus:outline-none">
         <BaseIcon name="arrowLeft" class="w-5 h-5" />
       </button>
-    </BaseTooltip>
+    </BaseToolTip>
     <TheSearch />
-    <BaseTooltip text="Search with your voice" left>
+    <BaseToolTip text="Search with your voice">
       <button class="p-2 focus:outline-none">
         <BaseIcon name="microphone" class="w-5 h-5" />
       </button>
-    </BaseTooltip>
+    </BaseToolTip>
   </div>
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue'
-import BaseTooltip from './BaseTooltip.vue'
-import TheSearch from './TheSearch.vue'
+import BaseIcon from './BaseIcon.vue';
+import BaseToolTip from './BaseToolTip.vue';
+import TheSearch from './TheSearch.vue';
 
 export default {
   components: {
+    TheSearch,
+    BaseToolTip,
     BaseIcon,
-    BaseTooltip,
-    TheSearch
   },
-
-  mounted () {
-    window.addEventListener('click', this.onClick)
-  },
-
-  beforeUnmount () {
-    window.removeEventListener('click', this.onClick)
+  mounted() {
+    window.addEventListener('click', this.onClick);
   },
 
   methods: {
-    onClick (event) {
+    onClick(event) {
       if (!this.$el.contains(event.target)) {
-        this.$emit('close')
+        this.$emit('close');
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
