@@ -5,7 +5,8 @@
         v-for="listItem in listItems.slice(0, 8)" 
         :key="listItem.label" 
         :label="listItem.label"
-        :icon="listItem.icon" :with-sub-menu="listItem.withSubMenu"
+        :icon="listItem.icon"
+        :with-sub-menu="listItem.withSubMenu"
         @click.stop="selectMenu(listItem)"
       />
     </ul>
@@ -16,7 +17,7 @@
         :label="listItems[8].label"
         :icon="listItems[8].icon"
         :with-sub-menu="listItems[8].withSubMenu"
-        @click.stop="$emit('select-menu', listItems[8])" />
+        @click.stop="selectMenu(listItems[8])" />
     </ul>
   </section>
 </template>
@@ -28,7 +29,8 @@ export default {
   components: {
     DropdownSettingsListItem,
   },
-  emits: ['select-menu'],
+  props: ['selectedOptions'],
+  emits: ['select-menu', 'select-option'],
   data() {
     return {
       listItems: [
