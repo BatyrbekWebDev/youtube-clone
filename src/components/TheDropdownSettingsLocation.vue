@@ -1,7 +1,7 @@
 <template>
   <DropdownSettingsHeader 
     title="Choose your location" 
-    @back="$emit('select-menu', 'main')"
+    @back="$emit('close')"
   />
   <section class="py-2">
     <ul class="max-h-96 overflow-auto">
@@ -24,7 +24,7 @@ export default {
     DropdownSettingsHeader
   },
   props: ['selectedOptions',],
-  emits: ['select-menu', 'select-option'],
+  emits: ['close', 'select-option'],
   data() {
     return {
       locations: ['United States', 'Russia', 'Spain'],

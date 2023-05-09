@@ -1,8 +1,5 @@
 <template>
-  <DropdownSettingsHeader 
-    title="Appearance" 
-    @back="$emit('select-menu', 'main')"
-  />
+  <DropdownSettingsHeader title="Appearance" @back="$emit('close')" />
   <section class="py-2">
     <div class="text-gray-500 text-xs p-3">
       Settings applies to this browser only
@@ -13,7 +10,7 @@
         :key="themeId"
         :label="themeName"
         :active="themeId === selectedOptions.theme.id"
-        @click="selectOption({id: themeId, text: themeName})"
+        @click="selectOption({ id: themeId, text: themeName })"
       />
     </ul>
   </section>
@@ -21,15 +18,15 @@
 
 <script>
 import DropdownSettingsListItem from './DropdownSettingsListItem.vue';
-import DropdownSettingsHeader from './DropdownSettingsHeader.vue'
+import DropdownSettingsHeader from './DropdownSettingsHeader.vue';
 
 export default {
   components: {
     DropdownSettingsListItem,
-    DropdownSettingsHeader
+    DropdownSettingsHeader,
   },
   props: ['selectedOptions'],
-  emits: ['select-menu', 'select-option'],
+  emits: ['close', 'select-option'],
   data() {
     return {
       themes: ['Device theme', 'Dark theme', 'Light theme'],
@@ -37,8 +34,8 @@ export default {
   },
   methods: {
     selectOption(theme) {
-      this.$emit('select-option', {name: 'theme', value: theme})
-    }
-  }
+      this.$emit('select-option', { name: 'theme', value: theme });
+    },
+  },
 };
 </script>
