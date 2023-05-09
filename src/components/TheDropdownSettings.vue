@@ -188,8 +188,8 @@ export default {
       this.isOpen = false;
       setTimeout(this.closeMenu, 100);
     },
-    selectMenu(menu) {
-      this.selectedMenu = menu;
+    selectMenu(menuItem) {
+      this.selectedMenu = menuItem;
       this.$refs.dropdown.focus();
     },
     closeMenu() {

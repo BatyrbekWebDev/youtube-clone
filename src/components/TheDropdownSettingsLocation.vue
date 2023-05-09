@@ -1,39 +1,27 @@
 <template>
-  <DropdownSettingsHeader 
-    title="Choose your location" 
-    @back="$emit('close')"
-  />
+  <DropdownSettingsHeader title="Choose your location" @back="$emit('close')" />
   <section class="py-2">
     <ul class="max-h-96 overflow-auto">
-      <DropdownSettingsListItem 
-        v-for="(locationName, locationId) in locations"           
-        :key="locationId" :label="locationName"
-        :active="locationId === selectedOptions.location.id" 
-        @click="selectOption({id: locationId, text: locationName})" />
+      <DropdownSettingsListItem
+        v-for="(locationName, locationId) in locations"
+        :key="locationId"
+        :label="locationName"
+        :active="locationId === selectedOptions.location.id"
+        @click="selectOption({ id: locationId, text: locationName })"
+      />
     </ul>
   </section>
 </template>
 
 <script>
-import DropdownSettingsListItem from './DropdownSettingsListItem.vue';
-import DropdownSettingsHeader from './DropdownSettingsHeader.vue'
-
+import dropdownSubmenu from '../mixins/dropdownSubmenu';
 export default {
-  components: {
-    DropdownSettingsListItem,
-    DropdownSettingsHeader
-  },
-  props: ['selectedOptions',],
-  emits: ['close', 'select-option'],
+  mixins: [dropdownSubmenu],
   data() {
     return {
+      optionName: 'location',
       locations: ['United States', 'Russia', 'Spain'],
     };
   },
-  methods: {
-    selectOption(location) {
-      this.$emit('select-option', {name: 'location', value: location})
-    }
-  }
 };
 </script>
