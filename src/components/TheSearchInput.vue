@@ -3,6 +3,7 @@
     <input
       type="text"
       placeholder="Search"
+      v-bind="$attrs"
       :class="classes"
       :value="query"
       @input="updateQuery($event.target.value)"
@@ -20,6 +21,7 @@
 <script>
 import BaseIcon from './BaseIcon.vue';
 export default {
+  inheritAttrs: false,
   components: {
     BaseIcon,
   },
@@ -48,7 +50,6 @@ export default {
   },
   methods: {
     updateQuery(query) {
-      
       this.$emit('update:query', query);
     },
   },
