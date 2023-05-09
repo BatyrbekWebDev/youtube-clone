@@ -3,8 +3,8 @@
     <div class="relative flex w-full">
       <TheSearchInput
         v-model:query="query"
-        @focus="isSearchInputFocused = true"
-        @blur="isSearchInputFocused = false"
+        @change-state="toggleSearchResults"
+        :has-results="results"
       />
       <TheSearchResults v-show="isSearchResultsShown" :results="results" />
     </div>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       query: '',
-      isSearchInputFocused: false,
+      isSearchResultsShown: false,
       keywords: [
         'new york giants',
         'new york alicia keys',
@@ -57,8 +57,11 @@ export default {
     trimmedQuery() {
       return this.query.replace(/\s+/g, ' ').trim();
     },
-    isSearchResultsShown() {
-      return this.isSearchInputFocused && this.results.length;
+
+  },
+  methods: {
+    toggleSearchResults(isSearchInputActive) {
+      this.isSearchResultsShown = isSearchInputActive && this.results.length;
     },
   },
 };
