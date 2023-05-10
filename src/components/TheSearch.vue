@@ -4,9 +4,11 @@
       <TheSearchInput
         v-model:query="query"
         :has-results="results.length"
+        @update:query="updateSearchResults"
         @change-state="toggleSearchResults"
         @keyup.up="handlePreviousSearchResult"
         @keyup.down="handleNextSearchResult"
+        @keydown.up.prevent
       />
       <TheSearchResults
         v-show="isSearchResultsShown"
@@ -19,24 +21,26 @@
 </template>
 
 <script>
-import TheSearchInput from './TheSearchInput.vue'
-import TheSearchButton from './TheSearchButton.vue'
-import TheSearchResults from './TheSearchResults.vue'
+import TheSearchInput from './TheSearchInput.vue';
+import TheSearchButton from './TheSearchButton.vue';
+import TheSearchResults from './TheSearchResults.vue';
 
 export default {
   components: {
     TheSearchInput,
     TheSearchButton,
-    TheSearchResults
+    TheSearchResults,
   },
 
   props: ['searchQuery'],
 
   emits: ['update-search-query'],
 
-  data () {
+  data() {
     return {
+      results: [],
       query: this.searchQuery,
+      activeQuery: this.searchQuery,
       isSearchResultsShown: false,
       activeSearchResultId: null,
       keywords: [
@@ -53,73 +57,88 @@ export default {
         'new york giants vs washington football live',
         'new york giants injury',
         'new york giants live stream',
-        'new york accent'
-      ]
-    }
+        'new york accent',
+      ],
+    };
   },
 
   computed: {
-    results () {
-      if (!this.query) {
-        return []
-      }
-
-      return this.keywords.filter(result => {
-        return result.includes(this.trimmedQuery)
-      })
+    trimmedQuery() {
+      return this.query.replace(/\s+/g, ' ').trim();
     },
-
-    trimmedQuery () {
-      return this.query.replace(/\s+/g, ' ').trim()
-    }
   },
 
   watch: {
-    query (query) {
-      this.$emit('update-search-query', query)
-    }
+    query(query) {
+      this.$emit('update-search-query', query);
+    },
   },
 
   methods: {
-    toggleSearchResults (isSearchInputActive) {
-      this.isSearchResultsShown = isSearchInputActive && this.results.length
-    },
+    updateSearchResults() {
+      this.activeSearchResultId = null;
+      this.activeQuery = this.query;
 
-    handlePreviousSearchResult () {
-      if (this.isSearchResultsShown) {
-        this.makePreviousSearchResultActive()
+      if (this.query === '') {
+        this.results = [];
       } else {
-        this.toggleSearchResults(true)
+        this.results = this.keywords.filter((result) => {
+          return result.includes(this.trimmedQuery);
+        });
       }
     },
 
-    handleNextSearchResult () {
+    toggleSearchResults(isSearchInputActive) {
+      this.isSearchResultsShown = isSearchInputActive && this.results.length;
+    },
+
+    handlePreviousSearchResult() {
       if (this.isSearchResultsShown) {
-        this.makeNextSearchResultActive()
+        this.makePreviousSearchResultActive();
       } else {
-        this.toggleSearchResults(true)
+        this.toggleSearchResults(true);
       }
     },
 
-    makePreviousSearchResultActive () {
+    handleNextSearchResult() {
+      if (this.isSearchResultsShown) {
+        this.makeNextSearchResultActive();
+      } else {
+        this.toggleSearchResults(true);
+      }
+    },
+
+    makePreviousSearchResultActive() {
       if (this.activeSearchResultId === null) {
-        this.activeSearchResultId = this.results.length - 1
+        this.activeSearchResultId = this.results.length - 1;
       } else if (this.activeSearchResultId === 0) {
-        this.activeSearchResultId = null
+        this.activeSearchResultId = null;
       } else {
-        this.activeSearchResultId--
+        this.activeSearchResultId--;
       }
+
+      this.updateQueryWithSearchResult();
     },
 
-    makeNextSearchResultActive () {
+    makeNextSearchResultActive() {
       if (this.activeSearchResultId === null) {
-        this.activeSearchResultId = 0
+        this.activeSearchResultId = 0;
       } else if (this.activeSearchResultId + 1 === this.results.length) {
-        this.activeSearchResultId = null
+        this.activeSearchResultId = null;
       } else {
-        this.activeSearchResultId++
+        this.activeSearchResultId++;
       }
-    }
-  }
-}
+
+      this.updateQueryWithSearchResult();
+    },
+
+    updateQueryWithSearchResult() {
+      const hasActiveSearchResult = this.activeSearchResultId !== null;
+
+      this.query = hasActiveSearchResult
+        ? this.results[this.activeSearchResultId]
+        : this.activeQuery;
+    },
+  },
+};
 </script>
