@@ -8,12 +8,12 @@
     <div class="text-sm">
       <span class="font-semibold text-gray-800">Video title {{ index }}</span>
       <div class="mt-1 flex">
-        <BaseToolTip :text="channelName" top>
-          <span> {{ channelName }}</span>
-        </BaseToolTip>
-        <BaseToolTip  text="Verified" top>
+        <BaseTooltip :text="channelName" top>
+          <span>{{ channelName }}</span>
+        </BaseTooltip>
+        <BaseTooltip text="Verified" top>
           <BaseIcon name="checkCircle" class="w-3.5 h-3.5 ml-1" />
-        </BaseToolTip>
+        </BaseTooltip>
       </div>
       <div v-html="summary"></div>
     </div>
@@ -22,26 +22,31 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
-import BaseToolTip from './BaseToolTip.vue';
-import VideoItemDropdown from './VideoItemDropdown.vue';
+import BaseIcon from './BaseIcon.vue'
+import BaseTooltip from './BaseTooltip.vue'
+import VideoItemDropdown from './VideoItemDropdown.vue'
+
 export default {
   components: {
     BaseIcon,
-    BaseToolTip,
-    VideoItemDropdown,
+    BaseTooltip,
+    VideoItemDropdown
   },
+
   props: ['index'],
-  data() {
+
+  data () {
     return {
-      channelName: `Channel name ${this.index}`,
-    };
+      channelName: `Channel name ${this.index}`
+    }
   },
+
   computed: {
-    summary() {
-      const days = this.index === 1 ? 'day' : 'days';
-      return `${this.index}K views  &middot; ${this.index} ${days} ago`;
-    },
-  },
-};
+    summary () {
+      const days = this.index === 1 ? 'day' : 'days'
+
+      return `${this.index}K views &middot; ${this.index} ${days} ago`
+    }
+  }
+}
 </script>

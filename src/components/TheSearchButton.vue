@@ -1,21 +1,22 @@
 <template>
-  <BaseToolTip text="Search">
+  <BaseTooltip text="Search">
     <button :class="classes">
       <BaseIcon name="search" class="w-5 h-5" />
     </button>
-  </BaseToolTip>
+  </BaseTooltip>
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
-import BaseToolTip from './BaseToolTip.vue';
+import BaseIcon from './BaseIcon.vue'
+import BaseTooltip from './BaseTooltip.vue'
 
 export default {
   components: {
     BaseIcon,
-    BaseToolTip,
+    BaseTooltip
   },
-  data() {
+
+  data () {
     return {
       classes: [
         'h-full',
@@ -31,9 +32,9 @@ export default {
         'border-gray-300',
         'rounded-tr-sm',
         'rounded-br-sm',
-        'hover:bg-gray-200',
-      ],
-    };
-  },
-};
+        'hover:bg-gray-200'
+      ]
+    }
+  }
+}
 </script>

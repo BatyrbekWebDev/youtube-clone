@@ -12,7 +12,8 @@
 <script>
 export default {
   props: ['results'],
-  data() {
+
+  data () {
     return {
       classes: [
         'absolute',
@@ -23,7 +24,7 @@ export default {
         'border-t-0',
         'border-gray-300',
         'shadow-md',
-        'pt-4',
+        'pt-4'
       ],
       itemClasses: [
         'hover:bg-gray-100',
@@ -31,7 +32,7 @@ export default {
         'px-3',
         'py-1',
         'select-none',
-        'truncate',
+        'truncate'
       ],
       reportLinkClasses: [
         'w-full',
@@ -41,9 +42,9 @@ export default {
         'italic',
         'text-gray-500',
         'hover:text-black',
-        'pr-2',
-      ],
-    };
-  },
-};
+        'pr-2'
+      ]
+    }
+  }
+}
 </script>

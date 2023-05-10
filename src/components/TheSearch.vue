@@ -3,8 +3,8 @@
     <div class="relative flex w-full">
       <TheSearchInput
         v-model:query="query"
+        :has-results="results.length"
         @change-state="toggleSearchResults"
-        :has-results="results"
       />
       <TheSearchResults v-show="isSearchResultsShown" :results="results" />
     </div>
@@ -13,19 +13,24 @@
 </template>
 
 <script>
-import TheSearchInput from './TheSearchInput.vue';
-import TheSearchResults from './TheSearchResults.vue';
-import TheSearchButton from './TheSearchButton.vue';
+import TheSearchInput from './TheSearchInput.vue'
+import TheSearchButton from './TheSearchButton.vue'
+import TheSearchResults from './TheSearchResults.vue'
 
 export default {
   components: {
     TheSearchInput,
-    TheSearchResults,
     TheSearchButton,
+    TheSearchResults
   },
-  data() {
+
+  props: ['searchQuery'],
+
+  emits: ['update-search-query'],
+
+  data () {
     return {
-      query: '',
+      query: this.searchQuery,
       isSearchResultsShown: false,
       keywords: [
         'new york giants',
@@ -41,28 +46,37 @@ export default {
         'new york giants vs washington football live',
         'new york giants injury',
         'new york giants live stream',
-        'new york accent',
-      ],
-    };
+        'new york accent'
+      ]
+    }
   },
+
   computed: {
-    results() {
+    results () {
       if (!this.query) {
-        return [];
+        return []
       }
-      return this.keywords.filter((result) => {
-        return result.includes(this.trimmedQuery);
-      });
-    },
-    trimmedQuery() {
-      return this.query.replace(/\s+/g, ' ').trim();
+
+      return this.keywords.filter(result => {
+        return result.includes(this.trimmedQuery)
+      })
     },
 
+    trimmedQuery () {
+      return this.query.replace(/\s+/g, ' ').trim()
+    }
   },
+
+  watch: {
+    query (query) {
+      this.$emit('update-search-query', query)
+    }
+  },
+
   methods: {
-    toggleSearchResults(isSearchInputActive) {
-      this.isSearchResultsShown = isSearchInputActive && this.results.length;
-    },
-  },
-};
+    toggleSearchResults (isSearchInputActive) {
+      this.isSearchResultsShown = isSearchInputActive && this.results.length
+    }
+  }
+}
 </script>

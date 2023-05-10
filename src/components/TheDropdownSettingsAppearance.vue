@@ -2,7 +2,7 @@
   <DropdownSettingsHeader title="Appearance" @back="$emit('close')" />
   <section class="py-2">
     <div class="text-gray-500 text-xs p-3">
-      Settings applies to this browser only
+      Setting applies to this browser only
     </div>
     <ul>
       <DropdownSettingsListItem
@@ -17,15 +17,16 @@
 </template>
 
 <script>
-import dropdownSubmenu from '../mixins/dropdownSubmenu';
+import dropdownSubmenu from '../mixins/dropdownSubmenu'
 
 export default {
   mixins: [dropdownSubmenu],
-  data() {
+
+  data () {
     return {
       optionName: 'theme',
-      themes: ['Device theme', 'Dark theme', 'Light theme'],
-    };
-  },
-};
+      themes: ['Device theme', 'Dark theme', 'Light theme']
+    }
+  }
+}
 </script>

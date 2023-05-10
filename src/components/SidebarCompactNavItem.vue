@@ -8,28 +8,32 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
+import BaseIcon from './BaseIcon.vue'
 
 export default {
-  components: { BaseIcon },
+  components: {
+    BaseIcon
+  },
+
   props: {
     isActive: Boolean,
     label: String,
-    icon: String,
+    icon: String
   },
+
   computed: {
-    classes() {
+    classes () {
       const classes = [
         'flex',
         'flex-col',
         'items-center',
         'px-2',
         'py-5',
-        'hover:bg-gray-100',
-      ];
+        'hover:bg-gray-100'
+      ]
+
       return this.isActive ? [...classes, 'text-red-500'] : classes
-    },
-  },
-};
+    }
+  }
+}
 </script>
-<!-- Абдулмуталим -->

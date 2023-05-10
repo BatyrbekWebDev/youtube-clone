@@ -24,21 +24,23 @@
 </template>
 
 <script>
-import DropdownSettingsListItem from './DropdownSettingsListItem.vue';
+import DropdownSettingsListItem from './DropdownSettingsListItem.vue'
 
 export default {
   components: {
-    DropdownSettingsListItem,
+    DropdownSettingsListItem
   },
+
   props: ['menuItems'],
+
   emits: ['select-menu'],
 
   methods: {
-    selectMenu(menuItem) {
+    selectMenu (menuItem) {
       if (menuItem.withSubMenu) {
-        this.$emit('select-menu', menuItem);
+        this.$emit('select-menu', menuItem)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

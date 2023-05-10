@@ -4,7 +4,7 @@
       :class="[
         'lg:w-1/4',
         'flex',
-        isMobileSearchShown ? 'opacity-0' : 'opacity-100',
+        isMobileSearchShown ? 'opacity-0' : 'opacity-100'
       ]"
     >
       <div class="flex items-center xl:w-64 xl:bg-white pl-4">
@@ -17,20 +17,18 @@
         <LogoMain />
       </div>
     </div>
-    <TheSearchMobile v-if="isMobileSearchShown" @close="closeMobileSearch" />
-    <div
-      v-else
-      class="hidden sm:flex items-center justify-end p-2.5 pl-8 md:pl-12 md:px-8 flex-1 lg:px-0 lg:w-1/2 max-w-screen-md"
-    >
-      <TheSearch />
-
-      <BaseToolTip text="Search with your voice">
-        <button class="p-2 focus:outline-none">
-          <BaseIcon name="microphone" class="w-5 h-5" />
-        </button>
-      </BaseToolTip>
-    </div>
-
+    <TheSearchMobile v-if="isMobileSearchShown" @close="closeMobileSearch">
+      <TheSearch
+        :search-query="searchQuery"
+        @update-search-query="searchQuery = $event"
+      />
+    </TheSearchMobile>
+    <TheSearchMain v-else>
+      <TheSearch
+        :search-query="searchQuery"
+        @update-search-query="searchQuery = $event"
+      />
+    </TheSearchMain>
     <div
       :class="[
         'flex',
@@ -40,24 +38,22 @@
         'sm:space-x-3',
         'p-2',
         'sm:px-4',
-        isMobileSearchShown ? 'opacity-0' : 'opacity-100',
+        isMobileSearchShown ? 'opacity-0' : 'opacity-100'
       ]"
     >
-      <BaseToolTip text="Search with your voice"
-        ><button class="sm:hidden p-2 focus:outline-none">
+      <BaseTooltip text="Search with your voice">
+        <button class="sm:hidden p-2 focus:outline-none">
           <BaseIcon name="microphone" class="w-5 h-5" />
         </button>
-      </BaseToolTip>
-
-      <BaseToolTip text="Search"
-        ><button
+      </BaseTooltip>
+      <BaseTooltip text="Search">
+        <button
           @click.stop="isMobileSearchActive = true"
           class="sm:hidden p-2 focus:outline-none"
         >
           <BaseIcon name="search" class="w-5 h-5" />
         </button>
-      </BaseToolTip>
-
+      </BaseTooltip>
       <TheDropdownApps />
       <TheDropdownSettings />
       <ButtonLogin />
@@ -66,32 +62,36 @@
 </template>
 
 <script>
-import LogoMain from './LogoMain.vue';
-import ButtonLogin from './ButtonLogin.vue';
-import BaseIcon from './BaseIcon.vue';
-import TheSearch from './TheSearch.vue';
-import TheSearchMobile from './TheSearchMobile.vue';
-import TheDropdownApps from './TheDropdownApps.vue';
-import TheDropdownSettings from './TheDropdownSettings.vue';
-import BaseToolTip from './BaseToolTip.vue';
-import { camelize } from 'vue';
+import BaseIcon from './BaseIcon.vue'
+import BaseTooltip from './BaseTooltip.vue'
+import LogoMain from './LogoMain.vue'
+import ButtonLogin from './ButtonLogin.vue'
+import TheSearch from './TheSearch.vue'
+import TheSearchMain from './TheSearchMain.vue'
+import TheSearchMobile from './TheSearchMobile.vue'
+import TheDropdownApps from './TheDropdownApps.vue'
+import TheDropdownSettings from './TheDropdownSettings.vue'
 
 export default {
   components: {
-    TheSearch,
-    ButtonLogin,
     BaseIcon,
+    BaseTooltip,
     LogoMain,
+    ButtonLogin,
+    TheSearch,
+    TheSearchMain,
     TheSearchMobile,
     TheDropdownApps,
-    TheDropdownSettings,
-    BaseToolTip,
+    TheDropdownSettings
   },
+
   emits: {
-    toggleSidebar: null,
+    toggleSidebar: null
   },
-  data() {
+
+  data () {
     return {
+      searchQuery: '',
       isSmallScreen: false,
       isMobileSearchActive: false,
       classes: [
@@ -99,31 +99,37 @@ export default {
         'justify-between',
         'w-full',
         'bg-white',
-        'bg-opacity-95',
-      ],
-    };
+        'bg-opacity-95'
+      ]
+    }
   },
+
   computed: {
-    isMobileSearchShown() {
-      return this.isSmallScreen && this.isMobileSearchActive;
-    },
+    isMobileSearchShown () {
+      return this.isSmallScreen && this.isMobileSearchActive
+    }
   },
-  mounted() {
-    this.onResize();
-    window.addEventListener('resize', this.onResize);
+
+  mounted () {
+    this.onResize()
+
+    window.addEventListener('resize', this.onResize)
   },
+
   methods: {
-    onResize() {
+    onResize () {
       if (window.innerWidth < 640) {
-        this.isSmallScreen = true;
-        return;
+        this.isSmallScreen = true
+        return
       }
-      this.closeMobileSearch();
-      this.isSmallScreen = false;
+
+      this.closeMobileSearch()
+      this.isSmallScreen = false
     },
-    closeMobileSearch() {
-      this.isMobileSearchActive = false;
-    },
-  },
-};
+
+    closeMobileSearch () {
+      this.isMobileSearchActive = false
+    }
+  }
+}
 </script>

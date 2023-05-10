@@ -14,15 +14,16 @@
 </template>
 
 <script>
-import dropdownSubmenu from '../mixins/dropdownSubmenu';
+import dropdownSubmenu from '../mixins/dropdownSubmenu'
 
 export default {
   mixins: [dropdownSubmenu],
-  data() {
+
+  data () {
     return {
       optionName: 'language',
-      languages: ['English', 'Russia'],
-    };
-  },
-};
+      languages: ['English', 'Russian']
+    }
+  }
+}
 </script>
