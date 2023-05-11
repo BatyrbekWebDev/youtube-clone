@@ -38,101 +38,101 @@
 </template>
 
 <script>
-  import { computed } from 'vue';
-  import BaseIcon from './BaseIcon.vue';
-  import BaseTooltip from './BaseTooltip.vue';
-  import LogoMain from './LogoMain.vue';
-  import ButtonLogin from './ButtonLogin.vue';
-  import TheSearchWrapper from './TheSearchWrapper.vue';
-  import TheDropdownApps from './TheDropdownApps.vue';
-  import TheDropdownSettings from './TheDropdownSettings.vue';
+import { computed } from 'vue';
+import BaseIcon from './BaseIcon.vue';
+import BaseTooltip from './BaseTooltip.vue';
+import LogoMain from './LogoMain.vue';
+import ButtonLogin from './ButtonLogin.vue';
+import TheSearchWrapper from './TheSearchWrapper.vue';
+import TheDropdownApps from './TheDropdownApps.vue';
+import TheDropdownSettings from './TheDropdownSettings.vue';
 
-  export default {
-    components: {
-      BaseIcon,
-      BaseTooltip,
-      LogoMain,
-      ButtonLogin,
-      TheSearchWrapper,
-      TheDropdownApps,
-      TheDropdownSettings,
+export default {
+  components: {
+    BaseIcon,
+    BaseTooltip,
+    LogoMain,
+    ButtonLogin,
+    TheSearchWrapper,
+    TheDropdownApps,
+    TheDropdownSettings,
+  },
+
+  provide() {
+    return {
+      isMobileSearchActive: computed(() => this.isMobileSearchActive),
+    };
+  },
+
+  emits: {
+    toggleSidebar: null,
+  },
+
+  data() {
+    return {
+      isSmallScreen: false,
+      isMobileSearchActive: false,
+      classes: [
+        'flex',
+        'justify-between',
+        'w-full',
+        'bg-white',
+        'bg-opacity-95',
+      ],
+    };
+  },
+
+  computed: {
+    isSearchShown() {
+      return this.isMobileSearchShown || !this.isSmallScreen;
     },
 
-    provide() {
-      return {
-        isMobileSearchActive: computed(() => this.isMobileSearchActive),
-      };
+    isMobileSearchShown() {
+      return this.isSmallScreen && this.isMobileSearchActive;
     },
 
-    emits: {
-      toggleSidebar: null,
+    leftSideClasses() {
+      return ['lg:w-1/4', 'flex', this.opacity];
     },
 
-    data() {
-      return {
-        isSmallScreen: false,
-        isMobileSearchActive: false,
-        classes: [
-          'flex',
-          'justify-between',
-          'w-full',
-          'bg-white',
-          'bg-opacity-95',
-        ],
-      };
+    rightSideClasses() {
+      return [
+        'flex',
+        'items-center',
+        'justify-end',
+        'lg:w-1/4',
+        'sm:space-x-3',
+        'p-2',
+        'sm:px-4',
+        this.opacity,
+      ];
     },
 
-    computed: {
-      isSearchShown() {
-        return this.isMobileSearchShown || !this.isSmallScreen;
-      },
+    opacity() {
+      return this.isMobileSearchShown ? 'opacity-0' : 'opacity-100';
+    },
+  },
 
-      isMobileSearchShown() {
-        return this.isSmallScreen && this.isMobileSearchActive;
-      },
+  mounted() {
+    this.onResize();
 
-      leftSideClasses() {
-        return ['lg:w-1/4', 'flex', this.opacity];
-      },
+    window.addEventListener('resize', this.onResize);
+  },
 
-      rightSideClasses() {
-        return [
-          'flex',
-          'items-center',
-          'justify-end',
-          'lg:w-1/4',
-          'sm:space-x-3',
-          'p-2',
-          'sm:px-4',
-          this.opacity,
-        ];
-      },
+  methods: {
+    onResize() {
+      if (window.innerWidth < 640) {
+        this.isSmallScreen = true;
+        return;
+      }
 
-      opacity() {
-        return this.isMobileSearchShown ? 'opacity-0' : 'opacity-100';
-      },
+      this.closeMobileSearch();
+      this.isSmallScreen = false;
     },
 
-    mounted() {
-      this.onResize();
-
-      window.addEventListener('resize', this.onResize);
+    closeMobileSearch() {
+      this.isMobileSearchActive = false;
     },
-
-    methods: {
-      onResize() {
-        if (window.innerWidth < 640) {
-          this.isSmallScreen = true;
-          return;
-        }
-
-        this.closeMobileSearch();
-        this.isSmallScreen = false;
-      },
-
-      closeMobileSearch() {
-        this.isMobileSearchActive = false;
-      },
-    },
-  };
+  },
+};
 </script>
