@@ -1,11 +1,12 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
+  purge: ['./index.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       transitionProperty: {
         'width': 'width',
-      }
+      },
     },
   },
   variants: {
