@@ -27,13 +27,17 @@ export default {
     text: String,
     top: Boolean,
     right: Boolean,
-    left: Boolean
+    left: Boolean,
   },
 
-  data () {
+  data() {
     return {
       isShown: false,
-      classes: [
+    };
+  },
+  computed: {
+    classes() {
+      return [
         'bg-gray-600',
         'bg-opacity-80',
         'rounded-sm',
@@ -43,25 +47,25 @@ export default {
         'p-2',
         'transform',
         'absolute',
-        ...this.getPositionClasses()
-      ]
-    }
+        ...this.getPositionClasses(),
+      ];
+    },
   },
 
   methods: {
-    getPositionClasses () {
-      const topClass = this.top ? 'bottom-12' : 'top-14'
+    getPositionClasses() {
+      const topClass = this.top ? 'bottom-12' : 'top-14';
 
       if (this.right) {
-        return [topClass, 'left-0']
+        return [topClass, 'left-0'];
       }
 
       if (this.left) {
-        return [topClass, 'right-0']
+        return [topClass, 'right-0'];
       }
 
-      return [topClass, 'left-1/2', '-translate-x-1/2']
-    }
-  }
-}
+      return [topClass, 'left-1/2', '-translate-x-1/2'];
+    },
+  },
+};
 </script>
