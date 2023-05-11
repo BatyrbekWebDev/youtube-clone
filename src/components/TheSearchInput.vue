@@ -17,7 +17,7 @@
       v-show="query"
       @click="clear"
     >
-      <BaseIcon name="x" class="w-5 w-5" />
+      <BaseIcon name="x" class="w-5 h-5" />
     </button>
   </div>
 </template>
@@ -29,6 +29,8 @@ export default {
   components: {
     BaseIcon
   },
+
+  inject: ['isMobileSearchActive'],
 
   props: ['query', 'hasResults'],
 
@@ -49,6 +51,14 @@ export default {
         'focus:border-blue-700',
         'focus:outline-none'
       ]
+    }
+  },
+
+  watch: {
+    isMobileSearchActive (isMobileSearchActive) {
+      if (isMobileSearchActive) {
+        this.$nextTick(() => this.$refs.input.focus())
+      }
     }
   },
 
