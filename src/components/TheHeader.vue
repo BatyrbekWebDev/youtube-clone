@@ -40,7 +40,10 @@
     </div>
   </header>
   <teleport to="body">
-    <BaseModal v-if="isVoiceModalOpen" @close="isVoiceModalOpen = false" />
+    <TheModalSearchWithVoice
+      v-if="isVoiceModalOpen"
+      @close="isVoiceModalOpen = false"
+    />
   </teleport>
 </template>
 
@@ -50,21 +53,21 @@ import BaseIcon from './BaseIcon.vue';
 import BaseTooltip from './BaseTooltip.vue';
 import LogoMain from './LogoMain.vue';
 import ButtonLogin from './ButtonLogin.vue';
-import BaseModal from './BaseModal.vue';
 import TheSearchWrapper from './TheSearchWrapper.vue';
 import TheDropdownApps from './TheDropdownApps.vue';
 import TheDropdownSettings from './TheDropdownSettings.vue';
+import TheModalSearchWithVoice from './TheModalSearchWithVoice.vue';
 
 export default {
   components: {
     BaseIcon,
     BaseTooltip,
     LogoMain,
-    BaseModal,
     ButtonLogin,
     TheSearchWrapper,
     TheDropdownApps,
     TheDropdownSettings,
+    TheModalSearchWithVoice,
   },
 
   provide() {
