@@ -3,7 +3,7 @@
     <p class="text-2xl mb-52">{{ text }}</p>
     <div class="flex justify-center items-center">
       <span v-show="isListening" :class="buttonAnimationClasses" />
-      <button :class="buttonClasses" @click="isListening = !isListening">
+      <button :class="buttonClasses" @click="toggleRecording">
         <BaseIcon name="microphone" />
       </button>
     </div>
@@ -19,15 +19,24 @@ export default {
   components: {
     BaseModal,
     BaseIcon,
+    recordingTimeout: null,
   },
   data() {
     return {
+      isQuiet: false,
       isListening: false,
+      isRecording: false,
     };
   },
   computed: {
     text() {
-      return this.isListening ? 'Listening...' : `Microphone off. Try again.`;
+      if (this.isQuiet) {
+        return "Didn't hear that. Try again.";
+      }
+      if (this.isListening || this.isRecording) {
+        return 'Listening...';
+      }
+      return 'Microphone off. Try again.';
     },
     buttonClasses() {
       return [
@@ -55,14 +64,44 @@ export default {
     },
     buttonAnimationClasses() {
       return [
+        this.isRecording ? 'bg-gray-300' : 'border-gray-300',
         'animate-ping',
         'absolute',
         'w-14',
         'h-14',
         'rounded-full',
         'border',
-        'border-gray-300',
       ];
+    },
+  },
+  mounted() {
+    this.handleRecordingTimeout();
+  },
+  beforeUnmount() {
+    clearTimeout(this.recordingTimeout);
+  },
+  methods: {
+    toggleRecording() {
+      clearTimeout(this.recordingTimeout);
+      this.isQuiet = false;
+      if (this.isRecording) {
+        this.isRecording = false;
+        this.isListening = false;
+      } else if (this.isListening) {
+        this.isRecording = true;
+      } else {
+        this.isListening = true;
+      }
+      this.handleRecordingTimeout();
+    },
+    handleRecordingTimeout() {
+      if (this.isListening || this.isRecording) {
+        this.recordingTimeout = setTimeout(() => {
+          this.isQuiet = true;
+          this.isListening = false;
+          this.isRecording = false;
+        }, 5000);
+      }
     },
   },
 };
