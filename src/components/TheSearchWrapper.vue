@@ -15,24 +15,23 @@
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
-import BaseModal from './BaseModal.vue';
-import BaseTooltip from './BaseTooltip.vue';
-import TheSearch from './TheSearch.vue';
+import BaseIcon from './BaseIcon.vue'
+import BaseTooltip from './BaseTooltip.vue'
+import TheSearch from './TheSearch.vue'
 
 export default {
   components: {
     BaseIcon,
-    BaseModal,
     BaseTooltip,
-    TheSearch,
+    TheSearch
   },
 
   props: ['isSmallScreen'],
+
   emits: ['close', 'open-voice-modal'],
 
   computed: {
-    classes() {
+    classes () {
       return this.isSmallScreen
         ? ['absolute', 'w-full', 'p-2', 'z-10', 'flex']
         : [
@@ -47,21 +46,21 @@ export default {
             'flex-1',
             'lg:px-0',
             'lg:w-1/2',
-            'max-w-screen-md',
-          ];
-    },
+            'max-w-screen-md'
+          ]
+    }
   },
 
-  mounted() {
-    window.addEventListener('click', this.onClick);
+  mounted () {
+    window.addEventListener('click', this.onClick)
   },
 
   methods: {
-    onClick(event) {
+    onClick (event) {
       if (!this.$el.contains(event.target)) {
-        this.$emit('close');
+        this.$emit('close')
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

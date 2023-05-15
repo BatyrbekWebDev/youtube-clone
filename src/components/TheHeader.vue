@@ -48,15 +48,15 @@
 </template>
 
 <script>
-import { computed } from 'vue';
-import BaseIcon from './BaseIcon.vue';
-import BaseTooltip from './BaseTooltip.vue';
-import LogoMain from './LogoMain.vue';
-import ButtonLogin from './ButtonLogin.vue';
-import TheSearchWrapper from './TheSearchWrapper.vue';
-import TheDropdownApps from './TheDropdownApps.vue';
-import TheDropdownSettings from './TheDropdownSettings.vue';
-import TheModalSearchWithVoice from './TheModalSearchWithVoice.vue';
+import { computed } from 'vue'
+import BaseIcon from './BaseIcon.vue'
+import BaseTooltip from './BaseTooltip.vue'
+import LogoMain from './LogoMain.vue'
+import ButtonLogin from './ButtonLogin.vue'
+import TheSearchWrapper from './TheSearchWrapper.vue'
+import TheDropdownApps from './TheDropdownApps.vue'
+import TheDropdownSettings from './TheDropdownSettings.vue'
+import TheModalSearchWithVoice from './TheModalSearchWithVoice.vue'
 
 export default {
   components: {
@@ -67,48 +67,48 @@ export default {
     TheSearchWrapper,
     TheDropdownApps,
     TheDropdownSettings,
-    TheModalSearchWithVoice,
+    TheModalSearchWithVoice
   },
 
-  provide() {
+  provide () {
     return {
-      isMobileSearchActive: computed(() => this.isMobileSearchActive),
-    };
+      isMobileSearchActive: computed(() => this.isMobileSearchActive)
+    }
   },
 
   emits: {
-    toggleSidebar: null,
+    toggleSidebar: null
   },
 
-  data() {
+  data () {
     return {
-      isVoiceModalOpen: false,
       isSmallScreen: false,
       isMobileSearchActive: false,
+      isVoiceModalOpen: false,
       classes: [
         'flex',
         'justify-between',
         'w-full',
         'bg-white',
-        'bg-opacity-95',
-      ],
-    };
+        'bg-opacity-95'
+      ]
+    }
   },
 
   computed: {
-    isSearchShown() {
-      return this.isMobileSearchShown || !this.isSmallScreen;
+    isSearchShown () {
+      return this.isMobileSearchShown || !this.isSmallScreen
     },
 
-    isMobileSearchShown() {
-      return this.isSmallScreen && this.isMobileSearchActive;
+    isMobileSearchShown () {
+      return this.isSmallScreen && this.isMobileSearchActive
     },
 
-    leftSideClasses() {
-      return ['lg:w-1/4', 'flex', this.opacity];
+    leftSideClasses () {
+      return ['lg:w-1/4', 'flex', this.opacity]
     },
 
-    rightSideClasses() {
+    rightSideClasses () {
       return [
         'flex',
         'items-center',
@@ -117,35 +117,35 @@ export default {
         'sm:space-x-3',
         'p-2',
         'sm:px-4',
-        this.opacity,
-      ];
+        this.opacity
+      ]
     },
 
-    opacity() {
-      return this.isMobileSearchShown ? 'opacity-0' : 'opacity-100';
-    },
+    opacity () {
+      return this.isMobileSearchShown ? 'opacity-0' : 'opacity-100'
+    }
   },
 
-  mounted() {
-    this.onResize();
+  mounted () {
+    this.onResize()
 
-    window.addEventListener('resize', this.onResize);
+    window.addEventListener('resize', this.onResize)
   },
 
   methods: {
-    onResize() {
+    onResize () {
       if (window.innerWidth < 640) {
-        this.isSmallScreen = true;
-        return;
+        this.isSmallScreen = true
+        return
       }
 
-      this.closeMobileSearch();
-      this.isSmallScreen = false;
+      this.closeMobileSearch()
+      this.isSmallScreen = false
     },
 
-    closeMobileSearch() {
-      this.isMobileSearchActive = false;
-    },
-  },
-};
+    closeMobileSearch () {
+      this.isMobileSearchActive = false
+    }
+  }
+}
 </script>

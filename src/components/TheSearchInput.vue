@@ -17,17 +17,17 @@
       v-show="query"
       @click="clear"
     >
-      <BaseIcon name="x" class="w-5 h-5" />
+      <BaseIcon name="x" class="w-5 w-5" />
     </button>
   </div>
 </template>
 
 <script>
-import BaseIcon from './BaseIcon.vue';
+import BaseIcon from './BaseIcon.vue'
 
 export default {
   components: {
-    BaseIcon,
+    BaseIcon
   },
 
   inject: ['isMobileSearchActive'],
@@ -36,7 +36,7 @@ export default {
 
   emits: ['update:query', 'change-state', 'enter'],
 
-  data() {
+  data () {
     return {
       isActive: false,
       classes: [
@@ -49,79 +49,79 @@ export default {
         'border',
         'border-gray-300',
         'focus:border-blue-700',
-        'focus:outline-none',
-      ],
-    };
+        'focus:outline-none'
+      ]
+    }
   },
 
   watch: {
-    isMobileSearchActive(isMobileSearchActive) {
+    'isMobileSearchActive.value' (isMobileSearchActive) {
       if (isMobileSearchActive) {
-        this.$nextTick(() => this.$refs.input.focus());
+        this.$nextTick(() => this.$refs.input.focus())
       }
-    },
+    }
   },
 
-  mounted() {
+  mounted () {
     if (window.innerWidth < 640) {
-      this.$refs.input.focus();
+      this.$refs.input.focus()
     }
 
-    document.addEventListener('keydown', this.onKeydown);
+    document.addEventListener('keydown', this.onKeydown)
   },
 
   methods: {
-    onKeydown(event) {
-      const isInputFocused = this.$refs.input === document.activeElement;
+    onKeydown (event) {
+      const isInputFocused = this.$refs.input === document.activeElement
 
       if (event.code === 'Slash' && !isInputFocused) {
-        event.preventDefault();
+        event.preventDefault()
 
-        this.$refs.input.focus();
+        this.$refs.input.focus()
       }
     },
 
-    updateQuery(query) {
-      this.$emit('update:query', query);
+    updateQuery (query) {
+      this.$emit('update:query', query)
 
-      this.setState(this.isActive);
+      this.setState(this.isActive)
     },
 
-    setState(isActive) {
-      this.isActive = isActive;
+    setState (isActive) {
+      this.isActive = isActive
 
-      this.$emit('change-state', isActive);
+      this.$emit('change-state', isActive)
     },
 
-    handleEsc() {
-      this.removeSelection();
+    handleEsc () {
+      this.removeSelection()
 
       if (this.isActive && this.hasResults) {
-        this.setState(false);
+        this.setState(false)
       } else {
-        this.$refs.input.blur();
+        this.$refs.input.blur()
       }
     },
 
-    handleEnter() {
-      this.setState(false);
+    handleEnter () {
+      this.setState(false)
 
-      this.$refs.input.blur();
+      this.$refs.input.blur()
 
-      this.$emit('enter');
+      this.$emit('enter')
     },
 
-    removeSelection() {
-      const end = this.$refs.input.value.length;
+    removeSelection () {
+      const end = this.$refs.input.value.length
 
-      this.$refs.input.setSelectionRange(end, end);
+      this.$refs.input.setSelectionRange(end, end)
     },
 
-    clear() {
-      this.$refs.input.focus();
+    clear () {
+      this.$refs.input.focus()
 
-      this.updateQuery('');
-    },
-  },
-};
+      this.updateQuery('')
+    }
+  }
+}
 </script>

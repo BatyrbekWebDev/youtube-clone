@@ -6,18 +6,19 @@
 </template>
 
 <script>
-import BaseModal from './BaseModal.vue';
-import TheButtonSearchWithVoice from './TheButtonSearchWithVoice.vue';
+import BaseModal from './BaseModal.vue'
+import TheButtonSearchWithVoice from './TheButtonSearchWithVoice.vue'
 
 export default {
   components: {
     BaseModal,
-    TheButtonSearchWithVoice,
+    TheButtonSearchWithVoice
   },
-  data() {
+
+  data () {
     return {
-      text: null,
-    };
-  },
-};
+      text: null
+    }
+  }
+}
 </script>
