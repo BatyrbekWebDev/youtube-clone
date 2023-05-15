@@ -14,16 +14,33 @@
         </span>
       </li>
     </ul>
-    <a href="#" :class="reportLinkClasses">Report search predictions</a>
+    <a href="#" :class="reportLinkClasses" @click="openSearchPredictionsModal">
+      Report search predictions
+    </a>
+    <teleport to="body">
+      <TheModalSearchPredictions
+        v-if="isSearchPredictionsModalOpen"
+        @close="isSearchPredictionsModalOpen = false"
+      />
+    </teleport>
   </div>
 </template>
 
 <script>
+import TheModalSearchPredictions from './TheModalSearchPredictions.vue';
 export default {
+  components: {
+    TheModalSearchPredictions,
+  },
   props: ['results', 'activeResultId'],
-
-  data () {
+  emits: [
+    'search-result-mouseenter',
+    'search-result-mouseleave',
+    'search-result-click',
+  ],
+  data() {
     return {
+      isSearchPredictionsModalOpen: false,
       classes: [
         'absolute',
         'top-full',
@@ -33,7 +50,7 @@ export default {
         'border-t-0',
         'border-gray-300',
         'shadow-md',
-        'pt-4'
+        'pt-4',
       ],
       reportLinkClasses: [
         'w-full',
@@ -43,22 +60,25 @@ export default {
         'italic',
         'text-gray-500',
         'hover:text-black',
-        'pr-2'
-      ]
-    }
+        'pr-2',
+      ],
+    };
   },
 
   methods: {
-    getItemClasses (resultId) {
+    getItemClasses(resultId) {
       return [
         resultId === this.activeResultId ? 'bg-gray-100' : 'bg-transparent',
         'text-black',
         'px-3',
         'py-1',
         'select-none',
-        'truncate'
-      ]
-    }
-  }
-}
+        'truncate',
+      ];
+    },
+    openSearchPredictionsModal() {
+      this.isSearchPredictionsModalOpen = true;
+    },
+  },
+};
 </script>
