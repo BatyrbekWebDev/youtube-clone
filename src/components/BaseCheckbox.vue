@@ -15,7 +15,7 @@
 export default {
   props: {
     id: String,
-    // modelValue: Array
+    modelValue: Array
   }
 }
 </script>

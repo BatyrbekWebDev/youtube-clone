@@ -10,21 +10,24 @@
         :value="label"
         v-bind="$attrs"
         v-model="modelValue"
-        >{{ label }}</BaseRadio
       >
+        {{ label }}
+      </BaseRadio>
     </div>
   </div>
 </template>
 
 <script>
-import BaseRadio from './BaseRadio.vue';
+import BaseRadio from './BaseRadio.vue'
+
 export default {
   components: {
-    BaseRadio,
+    BaseRadio
   },
+
   props: {
     categories: Array,
-    // modelValue: String
-  },
-};
+    modelValue: String
+  }
+}
 </script>

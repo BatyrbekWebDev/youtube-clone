@@ -10,16 +10,16 @@
       v-model="selectedSearchPredictionCategory"
       :categories="searchPredictionCategories"
     />
+
     <div class="text-black text-sm mt-6">
-      <BaseTextarea v-model="searchPredictionDetails"/>
+      <BaseTextarea v-model="searchPredictionDetails" :limit="500" />
     </div>
+
     <template #footer="{ close }">
-      <BaseButton @click="close" class="ml-auto">Cancel</BaseButton>
-      <BaseButton
-        @click="close"
-        class="ml-1 text-gray-400 cursor-auto"
-        disabled
-      >
+      <BaseButton @click="close" class="ml-auto">
+        Cancel
+      </BaseButton>
+      <BaseButton class="ml-1 text-gray-400 cursor-auto" disabled>
         Report
       </BaseButton>
     </template>
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import BaseButton from './BaseButton.vue';
-import BaseModal from './BaseModal.vue';
-import BaseTextarea from './BaseTextarea.vue';
-import TheSearchPredictionsList from './TheSearchPredictionsList.vue';
-import TheSearchPredictionCategories from './TheSearchPredictionCategories.vue';
+import BaseButton from './BaseButton.vue'
+import BaseModal from './BaseModal.vue'
+import BaseTextarea from './BaseTextarea.vue'
+import TheSearchPredictionsList from './TheSearchPredictionsList.vue'
+import TheSearchPredictionCategories from './TheSearchPredictionCategories.vue'
 
 export default {
   components: {
@@ -39,14 +39,14 @@ export default {
     BaseModal,
     BaseTextarea,
     TheSearchPredictionsList,
-    TheSearchPredictionCategories,
+    TheSearchPredictionCategories
   },
 
   props: {
-    searchPredictions: Array,
+    searchPredictions: Array
   },
 
-  data() {
+  data () {
     return {
       selectedSearchPredictions: [],
       selectedSearchPredictionCategory: null,
@@ -56,9 +56,9 @@ export default {
         'Sexually Explicit',
         'Violent',
         'Dangerous and harmful activity',
-        'Other',
-      ],
-    };
-  },
-};
+        'Other'
+      ]
+    }
+  }
+}
 </script>

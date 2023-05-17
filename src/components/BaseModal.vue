@@ -31,22 +31,22 @@
 </template>
 
 <script>
-import BaseModalButtonClose from './BaseModalButtonClose.vue';
-import BaseModalOverlay from './BaseModalOverlay.vue';
+import BaseModalButtonClose from './BaseModalButtonClose.vue'
+import BaseModalOverlay from './BaseModalOverlay.vue'
 
 export default {
   components: {
     BaseModalButtonClose,
-    BaseModalOverlay,
+    BaseModalOverlay
   },
 
   props: {
-    withCloseButton: Boolean,
+    withCloseButton: Boolean
   },
 
   emits: ['close'],
 
-  data() {
+  data () {
     return {
       isOpen: true,
       classes: [
@@ -57,21 +57,21 @@ export default {
         'flex',
         'justify-center',
         'items-start',
-        'mx-auto',
-      ],
-    };
+        'mx-auto'
+      ]
+    }
   },
 
-  mounted() {
-    this.$el.focus();
+  mounted () {
+    this.$el.focus()
   },
 
   methods: {
-    close() {
-      this.isOpen = false;
+    close () {
+      this.isOpen = false
 
-      setTimeout(() => this.$emit('close'), 100);
-    },
-  },
-};
+      setTimeout(() => this.$emit('close'), 100)
+    }
+  }
+}
 </script>

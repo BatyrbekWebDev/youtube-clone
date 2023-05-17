@@ -18,16 +18,16 @@
 </template>
 
 <script>
-import BaseCheckbox from './BaseCheckbox.vue';
+import BaseCheckbox from './BaseCheckbox.vue'
 
 export default {
   components: {
-    BaseCheckbox,
+    BaseCheckbox
   },
 
   props: {
     searchPredictions: Array,
-    // modelValue: Array,
-  },
-};
+    modelValue: Array
+  }
+}
 </script>
