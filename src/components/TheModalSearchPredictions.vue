@@ -6,40 +6,39 @@
       :search-predictions="searchPredictions"
     />
     <template #footer="{ close }">
-      <button
-        @click="close"
-        class="uppercase text-sm font-medium tracking-wider py-2.5 px-4 ml-auto mr-1 focus:outline-none"
-      >
-        Cancel
-      </button>
-      <button
-        class="uppercase text-sm font-medium tracking-wider py-2.5 px-4 ml-1 mr-1 focus:outline-none text-gray-400 cursor-auto"
+      <BaseButton @click="close" class="ml-auto">Cancel</BaseButton>
+      <BaseButton 
+        @click="close" 
+        class="ml-1 text-gray-400 cursor-auto"
         disabled
       >
         Report
-      </button>
+      </BaseButton>
     </template>
   </BaseModal>
 </template>
 
 <script>
-import BaseModal from './BaseModal.vue'
-import TheSearchPredictionsList from './TheSearchPredictionsList.vue'
+import BaseButton from './BaseButton.vue';
+
+import BaseModal from './BaseModal.vue';
+import TheSearchPredictionsList from './TheSearchPredictionsList.vue';
 
 export default {
   components: {
+    BaseButton,
     BaseModal,
-    TheSearchPredictionsList
+    TheSearchPredictionsList,
   },
 
   props: {
-    searchPredictions: Array
+    searchPredictions: Array,
   },
 
-  data () {
+  data() {
     return {
-      selectedSearchPredictions: []
-    }
-  }
-}
+      selectedSearchPredictions: [],
+    };
+  },
+};
 </script>
