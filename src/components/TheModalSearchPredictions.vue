@@ -5,10 +5,31 @@
       v-model="selectedSearchPredictions"
       :search-predictions="searchPredictions"
     />
+    <p class="text-xs text-gray-600 mt-5">The selected predictions are:</p>
+    <div class="space-y-3 text-black text-sm mt-5">
+      <div
+        v-for="(label, index) in searchPredictionCategories"
+        :key="label"
+        class="flex items-center"
+      >
+        <input
+          type="radio"
+          class="h-5 w-5 cursor-pointer"
+          :id="`search-prediction-category-${index}`"
+          :value="label"
+          v-model="selectedSearchPredictionCategory"
+        />
+        <label
+          :for="`search-prediction-category-${index}`"
+          class="pl-4 cursor-pointer flex-grow"
+          >{{ label }}</label
+        >
+      </div>
+    </div>
     <template #footer="{ close }">
       <BaseButton @click="close" class="ml-auto">Cancel</BaseButton>
-      <BaseButton 
-        @click="close" 
+      <BaseButton
+        @click="close"
         class="ml-1 text-gray-400 cursor-auto"
         disabled
       >
@@ -38,6 +59,14 @@ export default {
   data() {
     return {
       selectedSearchPredictions: [],
+      selectedSearchPredictionCategory: null,
+      searchPredictionCategories: [
+        'Hateful',
+        'Sexually Explicit',
+        'Violent',
+        'Dangerous and harmful activity',
+        'Other',
+      ],
     };
   },
 };
