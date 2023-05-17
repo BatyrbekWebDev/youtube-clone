@@ -12,7 +12,11 @@
       <BaseModalOverlay v-if="isOpen" @click="close" />
     </transition>
 
-    <div v-if="isOpen" class="relative bg-white w-full sm:w-2/3 m-8">
+    <div
+      v-if="isOpen"
+      class="relative bg-white w-full sm:w-2/3 m-8 overflow-auto"
+      style="max-height: calc(100vh - 64px)"
+    >
       <div v-if="withCloseButton" class="p-2 text-right">
         <BaseModalButtonClose @click="close" />
       </div>
@@ -27,22 +31,22 @@
 </template>
 
 <script>
-import BaseModalButtonClose from './BaseModalButtonClose.vue'
-import BaseModalOverlay from './BaseModalOverlay.vue'
+import BaseModalButtonClose from './BaseModalButtonClose.vue';
+import BaseModalOverlay from './BaseModalOverlay.vue';
 
 export default {
   components: {
     BaseModalButtonClose,
-    BaseModalOverlay
+    BaseModalOverlay,
   },
 
   props: {
-    withCloseButton: Boolean
+    withCloseButton: Boolean,
   },
 
   emits: ['close'],
 
-  data () {
+  data() {
     return {
       isOpen: true,
       classes: [
@@ -53,21 +57,21 @@ export default {
         'flex',
         'justify-center',
         'items-start',
-        'mx-auto'
-      ]
-    }
+        'mx-auto',
+      ],
+    };
   },
 
-  mounted () {
-    this.$el.focus()
+  mounted() {
+    this.$el.focus();
   },
 
   methods: {
-    close () {
-      this.isOpen = false
+    close() {
+      this.isOpen = false;
 
-      setTimeout(() => this.$emit('close'), 100)
-    }
-  }
-}
+      setTimeout(() => this.$emit('close'), 100);
+    },
+  },
+};
 </script>
